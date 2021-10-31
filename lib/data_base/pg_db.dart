@@ -22,17 +22,3 @@ class PgDb extends PostgreSQLConnection {
             useSSL: useSsl,
             isUnixSocket: isUnixSockett);
 }
-
-Future<void> main() async {
-  var myDb = PgDb();
-  try {
-    await myDb.open();
-    List<Map<String, Map<String, dynamic>>> results =
-        await myDb.mappedResultsQuery("SELECT * FROM person");
-    printSucess(results);
-  } catch (err) {
-    printError(err);
-  } finally {
-    myDb.close();
-  }
-}
