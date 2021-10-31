@@ -1,8 +1,8 @@
 import 'package:flutter_application_1/entities/entity.dart';
 
 class Person extends Entity {
-  static const String table = "person";
-
+  @override
+  // ignore: overridden_fields
   String uuid;
   String name;
   String birthDate;
