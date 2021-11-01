@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/entities/entity.dart';
+import 'package:flutter_application_1/backEnd/entities/entity.dart';
 
 class Person extends Entity {
   @override

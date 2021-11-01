@@ -1,5 +1,5 @@
-import 'package:flutter_application_1/Repository/repository.dart';
-import 'package:flutter_application_1/common/printer.dart';
+import 'package:flutter_application_1/backEnd/Repository/repository.dart';
+import 'package:flutter_application_1/backEnd/common/printer.dart';
 import '../data/persons.dart';
 
 class RepoPerson extends Repository {

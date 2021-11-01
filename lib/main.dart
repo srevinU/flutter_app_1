@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'data/persons.dart';
-import './entities/person.dart';
+import 'backEnd/data/persons.dart';
+import './backEnd//entities/person.dart';
 
 void main() {
   runApp(const MypeopleApp());
