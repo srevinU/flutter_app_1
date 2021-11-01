@@ -1,84 +1,95 @@
+import 'package:postgres/postgres.dart';
 import '../data_base/pg_db.dart';
 import '../common/printer.dart';
 
 class Repository {
   String table = "Repository";
 
-  //*** Data base ***\\
-  Future<PgDb?> connectDb() async {
-    try {
-      return PgDb();
-    } catch (err) {
-      printError(err);
-    }
-  }
+  //********************************************************* Data event *****\\
 
-  //*** Data event ****\\
-  Future<void> getRecords() async {
-    var myDb = PgDb();
+  dynamic getRecords() async {
+    PgDb myDb = PgDb();
     try {
       await myDb.open();
-      List<Map<String, Map<String, dynamic>>> results =
-          await myDb.mappedResultsQuery(getQuery("GET"));
-      printSucess(results);
+      return await myDb.mappedResultsQuery(getGetQuery());
     } catch (err) {
-      printError(err);
+      // printError(err);
+      rethrow;
     } finally {
       myDb.close();
     }
   }
 
-  Future<void> insertRecord(String record) async {
-    var myDb = PgDb();
+  dynamic insertRecord(List<Map<String, dynamic>>? record) async {
+    PgDb myDb = PgDb();
     try {
       await myDb.open();
-      List<Map<String, Map<String, dynamic>>> results =
-          await myDb.mappedResultsQuery(getQuery("INSERT", record));
-      printSucess(results);
+      return await myDb.query(getInsertQuery(),
+          substitutionValues: record?.first);
     } catch (err) {
-      printError(err);
+      // printError(err);
+      rethrow;
     } finally {
       myDb.close();
     }
   }
 
-  void updateRecord(record) {}
-
-  void deleteRecod(record) {}
-
-  //*** Queries ****\\
-  String getQuery(String type, [String? data]) {
-    switch (type) {
-      case "GET":
-        return "SELECT * FROM " + table;
-
-      case "INSERT":
-        if (data != null) {
-          return "INSERT INTO " +
-              table +
-              "(" +
-              getParams().join(",") +
-              ") " +
-              "VALUES (" +
-              data +
-              ")";
-        }
-        printError("Argument missing, data");
-        return "";
-
-      case "UPDATE":
-        return "UPDATE ";
-
-      case "DELETE":
-        return "DELETE";
-
-      default:
-        return "";
+  dynamic updateRecord(List<Map<String, dynamic>>? record) async {
+    PgDb myDb = PgDb();
+    try {
+      await myDb.open();
+      return await myDb.query(getUpdateQuery(), substitutionValues: record?[0]);
+    } catch (err) {
+      // printError(err);
+      rethrow;
+    } finally {
+      myDb.close();
     }
   }
 
-  //*** Params ****\\
+  dynamic deleteRecord(List<Map<String, dynamic>>? record) async {
+    PgDb myDb = PgDb();
+    try {
+      await myDb.open();
+      return await myDb.query(getDeleteQuery(),
+          substitutionValues: record?.first);
+    } catch (err) {
+      // printError(err);
+      rethrow;
+    } finally {
+      myDb.close();
+    }
+  }
+
+  //************************************************************ Queries *****\\
+
+  String getGetQuery() {
+    printError("Not Defined for $table");
+    return "";
+  }
+
+  String getInsertQuery() {
+    printError("Not Defined for $table");
+    return "";
+  }
+
+  String getUpdateQuery() {
+    printError("Not Defined for $table");
+    return "";
+  }
+
+  String getDeleteQuery() {
+    printError("Not Defined for $table");
+    return "";
+  }
+
+  //************************************************************* Params *****\\
+
   List<String> getParams() {
     return [];
+  }
+
+  void runTest() {
+    printError("Not defined");
   }
 }
