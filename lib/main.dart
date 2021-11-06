@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'backEnd/data/persons.dart';
-import './backEnd//entities/person.dart';
+import './backEnd/repository/repo_person.dart';
+import './backEnd/entities/person.dart';
 
 void main() {
   runApp(const MypeopleApp());
@@ -43,22 +43,60 @@ class Home extends StatelessWidget {
 class PeopleCardList extends StatelessWidget {
   PeopleCardList({Key? key}) : super(key: key);
 
-  final List<Map<String, dynamic>> _personData = getPersonData();
+  Future<List<Map<String, dynamic>>> getPersonData() async {
+    RepoPerson repoPerson = RepoPerson();
+    try {
+      final result = await repoPerson.getRecords();
+      print(result);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _personData.length,
-        itemBuilder: (BuildContext context, int index) {
-          return PeopleCard(person: Person.fromJson(_personData[index]));
+    RepoPerson repoPerson = RepoPerson();
+    return FutureBuilder(
+        future: getPersonData(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            print(snapshot.error);
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text('Error: ${snapshot.error}'),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return PeopleCard(
+                      person: Person.fromJson(snapshot.data![index]));
+                });
+          }
         });
   }
 }
 
 class PeopleCard extends StatelessWidget {
   final Person person;
-  PeopleCard({Key? key, required this.person}) : super(key: key);
-
+  const PeopleCard({Key? key, required this.person}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -27,14 +27,14 @@ class Person extends Entity {
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     return Person(
-        uuid: parsedJson['sys_uuid'],
-        name: parsedJson['u_name'],
-        birthDate: parsedJson['u_birthDate'],
-        phone: parsedJson['u_phone'],
-        email: parsedJson['u_email'],
-        gender: parsedJson['u_gender'],
-        streetAddress: parsedJson['u_streetAddress'],
-        country: parsedJson['u_country'],
-        postalCode: parsedJson['u_postalCode']);
+        uuid: (parsedJson['sys_uuid'] ?? "") as String,
+        name: (parsedJson['u_name'] ?? "") as String,
+        birthDate: (parsedJson['u_birthDate'] ?? "") as String,
+        phone: (parsedJson['u_phone'] ?? "") as String,
+        email: (parsedJson['u_email'] ?? "") as String,
+        gender: (parsedJson['u_gender'] ?? "") as String,
+        streetAddress: (parsedJson['u_streetAddress'] ?? "") as String,
+        country: (parsedJson['u_country'] ?? "") as String,
+        postalCode: (parsedJson['u_postalCode'] ?? "") as String);
   }
 }

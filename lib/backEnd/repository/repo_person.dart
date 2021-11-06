@@ -58,7 +58,8 @@ class RepoPerson extends Repository {
     List<Map<String, dynamic>> record = getPersonData();
     try {
       // GET
-      await getRecords();
+      var data = await getRecords();
+      print(data);
       printSucess("getRecords()");
       // INSERT
       var uuidReturned = await insertRecord(record);

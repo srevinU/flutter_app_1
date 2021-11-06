@@ -1,4 +1,3 @@
-import 'package:postgres/postgres.dart';
 import '../data_base/pg_db.dart';
 import '../common/printer.dart';
 
@@ -7,13 +6,12 @@ class Repository {
 
   //********************************************************* Data event *****\\
 
-  dynamic getRecords() async {
+  Future<List<Map<String, dynamic>>> getRecords() async {
     PgDb myDb = PgDb();
     try {
       await myDb.open();
       return await myDb.mappedResultsQuery(getGetQuery());
     } catch (err) {
-      // printError(err);
       rethrow;
     } finally {
       myDb.close();
