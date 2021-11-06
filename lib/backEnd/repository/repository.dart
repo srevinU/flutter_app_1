@@ -10,7 +10,7 @@ class Repository {
     PgDb myDb = PgDb();
     try {
       await myDb.open();
-      return await myDb.mappedResultsQuery(getGetQuery());
+      return await myDb.mappedResultsQuery(_getGetQuery());
     } catch (err) {
       rethrow;
     } finally {
@@ -61,9 +61,8 @@ class Repository {
 
   //************************************************************ Queries *****\\
 
-  String getGetQuery() {
-    printError("Not Defined for $table");
-    return "";
+  String _getGetQuery() {
+    return "SELECT * FROM $table";
   }
 
   String getInsertQuery() {
@@ -87,7 +86,35 @@ class Repository {
     return [];
   }
 
-  void runTest() {
-    printError("Not defined");
+//**************************************************************** Tests *****\\
+
+  List<Map<String, dynamic>> getRecordTest() {
+    return [
+      {"sys_type": null}
+    ];
+  }
+
+  @override
+  void runTest() async {
+    List<Map<String, dynamic>> record = getRecordTest();
+    // print(record);
+    try {
+      // GET
+      var data = await getRecords();
+      printSucess("getRecords()");
+      // INSERT
+      var uuidReturned = await insertRecord(record);
+      record[0]["sys_uuid"] = uuidReturned[0][0];
+      record[0]["u_name"] = "From test";
+      printSucess("insertRecord()");
+      //UPDATE
+      await updateRecord(record);
+      printSucess("updateRecord()");
+      // DELETE
+      await deleteRecord(record);
+      printSucess("deleteRecod()");
+    } catch (err) {
+      printError(err);
+    }
   }
 }
