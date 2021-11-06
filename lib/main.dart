@@ -87,7 +87,7 @@ class PeopleCardList extends StatelessWidget {
                 itemCount: snapshot.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   return PeopleCard(
-                      person: Person.fromJson(snapshot.data![index]));
+                      person: Person.fromJson(snapshot.data![index]['person']));
                 });
           }
         });
@@ -99,19 +99,23 @@ class PeopleCard extends StatelessWidget {
   const PeopleCard({Key? key, required this.person}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Center(
+        child: Card(
       // margin: EdgeInsets.all(10.0),
       color: Colors.blue[400],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
-      child: SizedBox(
-        width: 20,
-        height: 200,
-        child: Center(
-          child: Text(person.name),
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: Text(person.name),
+            subtitle: Text(person.phone),
+          )
+        ],
       ),
-    );
+    ));
   }
 }
