@@ -8,27 +8,16 @@ class RepoPerson extends Repository {
 
   //********************************************************* Data event *****\\
   // Nested in Repository parent
+  // getRecords()
+  // insertRecord()
+  // updateRecord()
+  // deleteRecord()
   //************************************************************ Queries *****\\
-
-  @override
-  String getInsertQuery() {
-    String params = getParams().join(",");
-    String values = getParams().map((element) {
-      return "@$element";
-    }).join(",");
-    return "INSERT INTO $table ($params) VALUES ($values) RETURNING sys_uuid";
-  }
-
-  @override
-  String getUpdateQuery() {
-    return "UPDATE $table SET u_name=@u_name, u_birthdate=@u_birthDate, u_phone=@u_phone, u_email=@u_email, u_gender=@u_gender, u_streetaddress=@u_streetAddress, u_country=@u_country, u_postalCode=@u_postalCode, sys_type=@sys_type WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
-  }
-
-  @override
-  String getDeleteQuery() {
-    return "DELETE FROM $table WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
-  }
-
+  // Nested in Repository parent
+  // _getGetQuery()
+  // getInsertQuery()
+  // getUpdateQuery()
+  //  getDeleteQuery()
   //****************************************************** Params&Values *****\\
   @override
   List<String> getParams() {
@@ -45,6 +34,9 @@ class RepoPerson extends Repository {
     ];
   }
 
+  //************************************************************** Tests *****\\
+  // Nested in Repository parent
+  // runTest()
   @override
   List<Map<String, dynamic>> getRecordTest() {
     return [

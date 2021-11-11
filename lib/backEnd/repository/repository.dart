@@ -66,18 +66,18 @@ class Repository {
   }
 
   String getInsertQuery() {
-    printError("Not Defined for $table");
-    return "";
+    String params = getParams().join(",");
+    String values = getParams().map((field) => "@$field").join(',');
+    return "INSERT INTO $table ($params) VALUES ($values) RETURNING sys_uuid";
   }
 
   String getUpdateQuery() {
-    printError("Not Defined for $table");
-    return "";
+    String params = getParams().map((field) => field + '=@' + field).join(',');
+    return "UPDATE $table SET $params WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
   }
 
   String getDeleteQuery() {
-    printError("Not Defined for $table");
-    return "";
+    return "DELETE FROM $table WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
   }
 
   //************************************************************* Params *****\\
