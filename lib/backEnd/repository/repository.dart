@@ -94,7 +94,6 @@ class Repository {
     ];
   }
 
-  @override
   void runTest() async {
     List<Map<String, dynamic>> record = getRecordTest();
     // print(record);
