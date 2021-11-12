@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import './backEnd/repository/repo_person.dart';
 import './backEnd/entities/person.dart';
 
@@ -20,7 +19,6 @@ class MypeopleApp extends StatelessWidget {
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +31,6 @@ class Home extends StatelessWidget {
         width: 400,
         child: PeopleCardList(),
       ),
-      // body: Center(
-      //   child: WtfList(),
-      // ),
     );
   }
 }
@@ -47,7 +42,7 @@ class PeopleCardList extends StatelessWidget {
     RepoPerson repoPerson = RepoPerson();
     try {
       final result = await repoPerson.getRecords();
-      print(result);
+      // print(result);
       return result;
     } catch (e) {
       rethrow;
@@ -56,7 +51,6 @@ class PeopleCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RepoPerson repoPerson = RepoPerson();
     return FutureBuilder(
         future: getPersonData(),
         builder: (BuildContext context,
@@ -107,7 +101,7 @@ class PeopleCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             leading: const Icon(Icons.person),
@@ -118,4 +112,14 @@ class PeopleCard extends StatelessWidget {
       ),
     ));
   }
+}
+
+Widget build(BuildContext context) {
+  return TextButton(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+    ),
+    onPressed: () {},
+    child: Text('TextButton'),
+  );
 }

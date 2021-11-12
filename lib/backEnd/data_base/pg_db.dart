@@ -1,5 +1,4 @@
 import 'package:postgres/postgres.dart';
-import '../common/printer.dart';
 
 class PgDb extends PostgreSQLConnection {
   PgDb(
