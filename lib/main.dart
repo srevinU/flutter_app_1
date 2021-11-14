@@ -23,13 +23,58 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("People App"),
+        title: const Text("Peoples"),
         backgroundColor: Colors.black,
+        leading: const Icon(Icons.account_circle_rounded),
+        actions: const [Icon(Icons.more_vert_rounded)],
       ),
       body: Container(
         alignment: Alignment.center,
         width: 400,
-        child: PeopleCardList(),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: 400,
+              height: 660,
+              decoration: const BoxDecoration(color: Colors.white),
+              child: PeopleCardList(),
+            ),
+            Container(
+              padding: const EdgeInsets.only(right: 25),
+              width: 400,
+              height: 60,
+              decoration:
+                  const BoxDecoration(color: Color.fromRGBO(255, 255, 255, 1)),
+              child: Row(
+                // textDirection: TextDirection.rtl,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [Text("Future Search field")],
+                    ),
+                  ),
+                  Expanded(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: FloatingActionButton(
+                          onPressed: () {} /* _addPeople */,
+                          tooltip: 'Add people',
+                          child: const Icon(Icons.add),
+                        ),
+                      ),
+                    ],
+                  ))
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -95,13 +140,11 @@ class PeopleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Card(
-      // margin: EdgeInsets.all(10.0),
       color: Colors.blue[400],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
       child: Column(
-        // mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             leading: const Icon(Icons.person),
