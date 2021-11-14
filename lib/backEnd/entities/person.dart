@@ -3,7 +3,7 @@ import 'package:flutter_application_1/backEnd/entities/entity.dart';
 class Person extends Entity {
   @override
   // ignore: overridden_fields
-  String uuid;
+  String sysUuid;
   String name;
   String birthDate;
   String phone;
@@ -14,7 +14,7 @@ class Person extends Entity {
   String postalCode;
 
   Person(
-      {required this.uuid,
+      {required this.sysUuid,
       required this.name,
       required this.birthDate,
       required this.phone,
@@ -23,11 +23,11 @@ class Person extends Entity {
       required this.streetAddress,
       required this.country,
       required this.postalCode})
-      : super(uuid: uuid);
+      : super(sysUuid: sysUuid);
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     return Person(
-        uuid: (parsedJson['sys_uuid'] ?? "") as String,
+        sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
         name: (parsedJson['u_name'] ?? "") as String,
         birthDate: (parsedJson['u_birthDate'] ?? "") as String,
         phone: (parsedJson['u_phone'] ?? "") as String,

@@ -48,7 +48,7 @@ class RepoPerson extends Repository {
         "u_email": "info@example.com",
         "image": "janedoe.jpg",
         "jobTitle": "Research Assistant",
-        "u_name": "Jane Doe",
+        "u_name": "Jane Doe TEST**",
         "alumniOf": "Dartmouth",
         "birthPlace": "Philadelphia, PA",
         "u_birthDate": "1979-10-12",

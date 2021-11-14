@@ -1,4 +1,4 @@
 class Entity {
-  String uuid;
-  Entity({required this.uuid});
+  String sysUuid;
+  Entity({required this.sysUuid});
 }

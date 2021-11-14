@@ -12,13 +12,35 @@ class MypeopleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Hello !",
-      home: Home(),
+      home: PeopleHomePage(
+        title: 'Peoples',
+      ),
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class PeopleHomePage extends StatefulWidget {
+  const PeopleHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<PeopleHomePage> createState() => _PeopleHomePageState();
+}
+
+class _PeopleHomePageState extends State<PeopleHomePage> {
+  RepoPerson repoPerson = RepoPerson();
+
+  void addOnePeople() {
+    setState(() {
+      repoPerson.insertRecord(repoPerson.getRecordTest());
+    });
+  }
+
+  void delOnePeople(String sysUuid) {
+    setState(() {
+      repoPerson.deleteRecord(sysUuid);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +61,9 @@ class Home extends StatelessWidget {
               width: 400,
               height: 660,
               decoration: const BoxDecoration(color: Colors.white),
-              child: PeopleCardList(),
+              child: PeopleCardList(
+                  getPeoples: repoPerson.getRecords,
+                  delOnePeople: delOnePeople),
             ),
             Container(
               padding: const EdgeInsets.only(right: 25),
@@ -63,7 +87,7 @@ class Home extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: FloatingActionButton(
-                          onPressed: () {} /* _addPeople */,
+                          onPressed: addOnePeople,
                           tooltip: 'Add people',
                           child: const Icon(Icons.add),
                         ),
@@ -81,23 +105,15 @@ class Home extends StatelessWidget {
 }
 
 class PeopleCardList extends StatelessWidget {
-  PeopleCardList({Key? key}) : super(key: key);
-
-  Future<List<Map<String, dynamic>>> getPersonData() async {
-    RepoPerson repoPerson = RepoPerson();
-    try {
-      final result = await repoPerson.getRecords();
-      // print(result);
-      return result;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
+  PeopleCardList(
+      {Key? key, required this.getPeoples, required this.delOnePeople})
+      : super(key: key);
+  final Function getPeoples;
+  Function delOnePeople;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getPersonData(),
+        future: getPeoples(),
         builder: (BuildContext context,
             AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
           if (!snapshot.hasData) {
@@ -126,7 +142,9 @@ class PeopleCardList extends StatelessWidget {
                 itemCount: snapshot.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   return PeopleCard(
-                      person: Person.fromJson(snapshot.data![index]['person']));
+                    person: Person.fromJson(snapshot.data![index]['person']),
+                    delOnePeople: delOnePeople,
+                  );
                 });
           }
         });
@@ -135,7 +153,9 @@ class PeopleCardList extends StatelessWidget {
 
 class PeopleCard extends StatelessWidget {
   final Person person;
-  const PeopleCard({Key? key, required this.person}) : super(key: key);
+  final Function delOnePeople;
+  const PeopleCard({Key? key, required this.person, required this.delOnePeople})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -147,6 +167,8 @@ class PeopleCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
+            onTap: () =>
+                delOnePeople(person.sysUuid), // delOnePeople(person.sysUuid),
             leading: const Icon(Icons.person),
             title: Text(person.name),
             subtitle: Text(person.phone),
@@ -155,14 +177,4 @@ class PeopleCard extends StatelessWidget {
       ),
     ));
   }
-}
-
-Widget build(BuildContext context) {
-  return TextButton(
-    style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-    ),
-    onPressed: () {},
-    child: Text('TextButton'),
-  );
 }

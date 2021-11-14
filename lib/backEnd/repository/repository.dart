@@ -25,7 +25,6 @@ class Repository {
       return await myDb.query(getInsertQuery(),
           substitutionValues: record?.first);
     } catch (err) {
-      // printError(err);
       rethrow;
     } finally {
       myDb.close();
@@ -38,21 +37,19 @@ class Repository {
       await myDb.open();
       return await myDb.query(getUpdateQuery(), substitutionValues: record?[0]);
     } catch (err) {
-      // printError(err);
       rethrow;
     } finally {
       myDb.close();
     }
   }
 
-  dynamic deleteRecord(List<Map<String, dynamic>>? record) async {
+  void deleteRecord(String sysUuid) async {
     PgDb myDb = PgDb();
     try {
       await myDb.open();
-      return await myDb.query(getDeleteQuery(),
-          substitutionValues: record?.first);
+      await myDb
+          .query(getDeleteQuery(), substitutionValues: {"sysUuid": sysUuid});
     } catch (err) {
-      // printError(err);
       rethrow;
     } finally {
       myDb.close();
@@ -73,11 +70,11 @@ class Repository {
 
   String getUpdateQuery() {
     String params = getParams().map((field) => field + '=@' + field).join(',');
-    return "UPDATE $table SET $params WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
+    return "UPDATE $table SET $params WHERE sys_uuid=@sysUuid RETURNING sys_uuid";
   }
 
   String getDeleteQuery() {
-    return "DELETE FROM $table WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
+    return "DELETE FROM $table WHERE sys_uuid=@sysUuid RETURNING sys_uuid";
   }
 
   //************************************************************* Params *****\\
@@ -86,7 +83,7 @@ class Repository {
     return [];
   }
 
-//**************************************************************** Tests *****\\
+  //**************************************************************** Tests *****\\
 
   List<Map<String, dynamic>> getRecordTest() {
     return [
@@ -96,22 +93,21 @@ class Repository {
 
   void runTest() async {
     List<Map<String, dynamic>> record = getRecordTest();
-    // print(record);
     try {
       // GET
       var data = await getRecords();
       printSucess("getRecords()");
       // INSERT
       var uuidReturned = await insertRecord(record);
-      record[0]["sys_uuid"] = uuidReturned[0][0];
+      record[0]["sysUuid"] = uuidReturned[0][0];
       record[0]["u_name"] = "From test";
       printSucess("insertRecord()");
       //UPDATE
       await updateRecord(record);
       printSucess("updateRecord()");
       // DELETE
-      await deleteRecord(record);
-      printSucess("deleteRecod()");
+      deleteRecord(record[0]["sysUuid"]);
+      printSucess("deleteRecord()");
     } catch (err) {
       printError(err);
     }
