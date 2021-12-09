@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './backEnd/repository/repo_person.dart';
-import './backEnd/entities/person.dart';
+import 'list.dart';
 
 void main() {
   runApp(const MypeopleApp());
@@ -35,10 +35,11 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
     });
   }
 
-  void delOnePeople(String sysUuid) {
-    setState(() {
-      repoPerson.deleteRecord(sysUuid);
-    });
+  Future<void> delOnePeople(sysUuid) async {
+    await repoPerson.deleteRecord(sysUuid);
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -101,80 +102,5 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
         ),
       ),
     );
-  }
-}
-
-class PeopleCardList extends StatelessWidget {
-  PeopleCardList(
-      {Key? key, required this.getPeoples, required this.delOnePeople})
-      : super(key: key);
-  final Function getPeoples;
-  Function delOnePeople;
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getPeoples(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            print(snapshot.error);
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Error: ${snapshot.error}'),
-                  )
-                ],
-              ),
-            );
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return PeopleCard(
-                    person: Person.fromJson(snapshot.data![index]['person']),
-                    delOnePeople: delOnePeople,
-                  );
-                });
-          }
-        });
-  }
-}
-
-class PeopleCard extends StatelessWidget {
-  final Person person;
-  final Function delOnePeople;
-  const PeopleCard({Key? key, required this.person, required this.delOnePeople})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Card(
-      color: Colors.blue[400],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            onTap: () =>
-                delOnePeople(person.sysUuid), // delOnePeople(person.sysUuid),
-            leading: const Icon(Icons.person),
-            title: Text(person.name),
-            subtitle: Text(person.phone),
-          )
-        ],
-      ),
-    ));
   }
 }

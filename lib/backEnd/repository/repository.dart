@@ -43,11 +43,11 @@ class Repository {
     }
   }
 
-  void deleteRecord(String sysUuid) async {
+  dynamic deleteRecord(String sysUuid) async {
     PgDb myDb = PgDb();
     try {
       await myDb.open();
-      await myDb
+      return await myDb
           .query(getDeleteQuery(), substitutionValues: {"sysUuid": sysUuid});
     } catch (err) {
       rethrow;
