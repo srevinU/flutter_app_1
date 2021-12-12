@@ -3,7 +3,7 @@ import 'package:flutter_application_1/backEnd/Repository/repository.dart';
 class RepoPerson extends Repository {
   @override
   // ignore: overridden_fields
-  String table = "person";
+  String table = "t_person";
 
   //********************************************************* Data event *****\\
   // Nested in Repository parent

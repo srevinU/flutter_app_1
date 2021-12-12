@@ -2,36 +2,44 @@ import 'package:flutter/material.dart';
 import './backEnd/entities/person.dart';
 import 'card.dart';
 
-class PeopleCardList extends StatefulWidget {
-  PeopleCardList(
+class PeopleCardList extends StatelessWidget {
+  final Function getPeoples;
+  final Function delOnePeople;
+  const PeopleCardList(
       {Key? key, required this.getPeoples, required this.delOnePeople})
       : super(key: key);
-  final Function getPeoples;
-  Function delOnePeople;
-  @override
-  State<PeopleCardList> createState() => _PeopleCardList();
-}
-
-class _PeopleCardList extends State<PeopleCardList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: widget.getPeoples(),
+        future: getPeoples(),
         builder: (BuildContext context,
             AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error);
-            return const Center(child: Icon(Icons.error));
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(
+                    Icons.error_sharp,
+                    color: Colors.red,
+                  ),
+                  Text(
+                    "\rPlease, try to connect later.",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            );
           } else if (snapshot.hasData) {
             final items = snapshot.data;
             return ListView.builder(
                 itemCount: items?.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final item = items![index]['person'];
+                  final item = items![index]['t_person'];
                   return Dismissible(
                       key: ValueKey<String>(item['sys_uuid']),
                       onDismissed: (DismissDirection direction) {
-                        widget.delOnePeople(item['sys_uuid']);
+                        delOnePeople(item['sys_uuid']);
                         items.removeAt(index);
                       },
                       background: Container(

@@ -9,21 +9,59 @@ class PeopleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
+      child: GestureDetector(
+        onTap: () => print("Open contact ${index}"),
         child: Card(
-      color: Colors.blue[400],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
+          color: Colors.blue[400],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Row(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(2),
+                height: 80,
+                width: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const <Widget>[
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 26,
+                      child: CircleAvatar(
+                        radius: 24,
+                        backgroundImage: NetworkImage(
+                            "https://www.pinclipart.com/picdir/big/218-2189254_free-online-avatars-kid-characters-family-vector-for.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(2),
+                height: 80,
+                width: 180,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(person.name),
+                    Text(person.phone),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(2),
+                height: 80,
+                width: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [Text("Other info")],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: Text(person.name),
-            // subtitle: Text(person.phone),
-            subtitle: Text(index.toString()),
-          )
-        ],
-      ),
-    ));
+    );
   }
 }
