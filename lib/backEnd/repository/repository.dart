@@ -25,6 +25,7 @@ class Repository {
       return await myDb.query(getInsertQuery(),
           substitutionValues: record?.first);
     } catch (err) {
+      printError("From repo: $err");
       rethrow;
     } finally {
       myDb.close();

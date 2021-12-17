@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/backend/common/printer.dart';
+import 'package:flutter_application_1/form.dart';
 import './backEnd/repository/repo_person.dart';
 import 'list.dart';
+import 'form.dart';
 
 void main() {
   runApp(const MypeopleApp());
@@ -88,7 +91,12 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: FloatingActionButton(
-                          onPressed: addOnePeople,
+                          onPressed: () => Navigator.push(
+                              /*addOnePeople */
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PeopleForm(addOnePeople: addOnePeople))),
                           tooltip: 'Add people',
                           child: const Icon(Icons.add),
                         ),
