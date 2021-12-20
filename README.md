@@ -1,37 +1,34 @@
 # flutter_application_1
-
 First flutter project application. The application aims to manage list of contact with categoris.
 
-Details:
-
-Frontend:
+## Details info:
+### Frontend:
 - Flutter
-
-Backend:
+### Backend:
 - Dart
-
-Database:
--Postgresql
-
-Devops:
+### Database:
+- Postgresql
+### Devops:
 - N/A
 
 ## Getting Started with macOS
-
 ### Flutter setUp
 - [Install Flutter](https://docs.flutter.dev/get-started/install/macos)
 - [Install xCode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 - [Install Android Studio](https://developer.android.com/studio?gclid=Cj0KCQiA8ICOBhDmARIsAEGI6o39f66VozuRhMIyFv77gAWBHTINDuZPGmpt3AXCYW7IJTYpan1YuHQaAq_zEALw_wcB&gclsrc=aw.ds)
 
-Run
+Run to check dependancies:
 ```
 flutter doctor
 ```
-
 Info error:
 - [cmdline-tools component is missing](https://stackoverflow.com/questions/68236007/i-am-getting-this-errors-cmdline-tools-component-is-missing-after-installing-f)
 
 
-### Dart setUp
 ### Postgresql setUp
+
+- [Install Porsgres.app](https://postgresapp.com/downloads.html)
+- [Install PgAdmin4](https://www.pgadmin.org/download/pgadmin-4-macos/) (If needed)
+
+
 #### Database setUp
