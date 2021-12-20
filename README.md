@@ -1,5 +1,5 @@
 # flutter_application_1
-First flutter project application. The application aims to manage list of contact with categoris.
+First flutter project application. The application aims to manage list of contact with categories.
 
 ## Details info:
 ### Frontend:
