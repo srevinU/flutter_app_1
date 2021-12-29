@@ -29,38 +29,24 @@ Info error:
 Install homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Check version
+brew -v
 ```
 Install postgresql
 ```
 brew install postgresql
-```
-Install postgresql if needed
-```
-brew install pgadmin4
+# Check version
+brew info postgresql
 ```
 
 #### Database setUp
 
-Start/Strop server
+Start server
 ```
 brew services start postgres
-brew services stop postgres
+# brew services stop postgres
 ```
-Create database
+SetUp database
 ```
-createdb db_flutter_app_1
-```
-Access server
-```
-psql db_flutter_app_1
-```
-Create Super admin role
-```
-CREATE ROLE super_admin WITH LOGIN PASSWORD 'superadmin123';
-ALTER ROLE super_admin Superuser;
-```
-Create admin role
-```
-CREATE ROLE admin WITH LOGIN PASSWORD 'admin123';
-ALTER ROLE admin CREATEDB;
+bash flutter_app_1/lib/backEnd/setUp/db.bash
 ```
