@@ -26,9 +26,41 @@ Info error:
 
 
 ### Postgresql setUp
-
-- [Install Porsgres.app](https://postgresapp.com/downloads.html)
-- [Install PgAdmin4](https://www.pgadmin.org/download/pgadmin-4-macos/) (If needed)
-
+Install homebrew
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+Install postgresql
+```
+brew install postgresql
+```
+Install postgresql if needed
+```
+brew install pgadmin4
+```
 
 #### Database setUp
+
+Start/Strop server
+```
+brew services start postgres
+brew services stop postgres
+```
+Create database
+```
+createdb db_flutter_app_1
+```
+Access server
+```
+psql db_flutter_app_1
+```
+Create Super admin role
+```
+CREATE ROLE super_admin WITH LOGIN PASSWORD 'superadmin123';
+ALTER ROLE super_admin Superuser;
+```
+Create admin role
+```
+CREATE ROLE admin WITH LOGIN PASSWORD 'admin123';
+ALTER ROLE admin CREATEDB;
+```
