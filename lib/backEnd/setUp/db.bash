@@ -16,6 +16,13 @@ function displayInfo {
     fi
 }
 
+function checkError {
+  if [[ 0 -ne $? ]]; then
+    echo $1
+    exit
+  fi
+}
+
 
 # Start setUp
 dbName='db_flutter_app_1'
@@ -23,36 +30,43 @@ dbName='db_flutter_app_1'
 # Create database
 displayInfo "Database" $dbName "setUp"
 psql -U postgres -c "DROP DATABASE IF EXISTS ${dbName}"
+checkError
 psql postgres -c "CREATE DATABASE ${dbName} WITH ENCODING 'UTF8'
                   TEMPLATE template0"
-# Extension creation
-psql ${dbName} -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
-displayInfo "Database" $dbName "Created"
+checkError
 
+# Extension creation
+
+psql ${dbName} -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
+checkError
+displayInfo "Database" $dbName "Created"
 
 # Type table creation
 table='t_type'
 displayInfo "Table" $table "setUp"
 # psql ${dbName} -U postgres -c "DROP TABLE IF EXISTS ${table}"
-psql ${dbName} -c "CREATE TABLE ${table}(
-   sys_uuid uuid DEFAULT uuid_generate_v4 ()
+psql ${dbName} -U postgres -c "CREATE TABLE ${table}(
+  sys_uuid uuid DEFAULT uuid_generate_v4 ()
   ,sys_name        VARCHAR(50) NOT NULL UNIQUE
   ,PRIMARY KEY (sys_uuid)
 );"
+checkError
 displayInfo "Table" $table "Created"
+
 
 # Category table creation
 table='t_category'
 displayInfo "Table" $table "setUp"
 # psql ${dbName} -U postgres -c "DROP TABLE IF EXISTS ${table}"
 psql ${dbName} -U postgres -c "CREATE TABLE ${table}(
-   sys_uuid uuid DEFAULT uuid_generate_v4()
+  sys_uuid uuid DEFAULT uuid_generate_v4()
   ,sys_type uuid NOT NULL
   ,sys_cat_name VARCHAR(50) NOT NULL
   ,UNIQUE(sys_type, sys_cat_name)
   ,PRIMARY KEY (sys_uuid)
   ,CONSTRAINT fk_type FOREIGN KEY(sys_type) REFERENCES t_type(sys_uuid)
 );"
+checkError
 displayInfo "Table" $table "Created"
 
 # Person table creation
@@ -60,7 +74,7 @@ table='t_person'
 displayInfo "Table" $table "setUp"
 # psql ${dbName} -U postgres -c "DROP TABLE IF EXISTS ${table}"
 psql ${dbName} -U postgres -c "CREATE TABLE t_person(
-   sys_uuid uuid DEFAULT uuid_generate_v4()
+  sys_uuid uuid DEFAULT uuid_generate_v4()
   ,sys_context     VARCHAR(50) NULL
   ,sys_type        VARCHAR(50) NOT NULL
   ,u_streetAddress VARCHAR(120) NOT NULL
@@ -81,4 +95,6 @@ psql ${dbName} -U postgres -c "CREATE TABLE t_person(
   ,PRIMARY KEY (sys_uuid)
   ,CONSTRAINT fk_category FOREIGN KEY(sys_category) REFERENCES t_category(sys_uuid)  
 );"
+checkError
 displayInfo "Table" $table "Created"
+
