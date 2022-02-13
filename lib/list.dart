@@ -37,24 +37,25 @@ class PeopleCardList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   final item = items![index]['t_person'];
                   return Dismissible(
-                      key: ValueKey<String>(item['sys_uuid']),
-                      onDismissed: (DismissDirection direction) {
-                        delOnePeople(item['sys_uuid']);
-                        items.removeAt(index);
-                      },
-                      background: Container(
-                        padding: const EdgeInsets.only(right: 15),
-                        color: Colors.red,
-                        child: const Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
+                    key: ValueKey<String>(item['sys_uuid']),
+                    onDismissed: (DismissDirection direction) {
+                      delOnePeople(item['sys_uuid']);
+                      items.removeAt(index);
+                    },
+                    background: Container(
+                      padding: const EdgeInsets.only(right: 15),
+                      color: Colors.red,
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
                         ),
                       ),
-                      child: PeopleCard(
-                          person: Person.fromJson(item), index: index));
+                    ),
+                    child:
+                        PeopleCard(person: Person.fromJson(item), index: index),
+                  );
                 });
           } else {
             return const Center(child: CircularProgressIndicator());

@@ -1,4 +1,6 @@
 class Entity {
-  String sysUuid;
-  Entity({required this.sysUuid});
+  String? sysUuid;
+  Entity({this.sysUuid});
+
+  Map<String, dynamic> toJson() => {"sysUuid": sysUuid};
 }

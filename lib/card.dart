@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './backEnd/entities/person.dart';
+import 'form.dart';
 
 class PeopleCard extends StatelessWidget {
   final Person person;
@@ -10,7 +11,15 @@ class PeopleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
-        onTap: () => print("Open contact ${index}"),
+        // onTap: () => print("Open contact ${index}"),
+        onTap: () => Navigator.push(
+          /*peopleForm */
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                PeopleForm(type: Type.read, record: person, addFunction: null),
+          ),
+        ),
         child: Card(
           color: Colors.blue[400],
           shape: RoundedRectangleBorder(

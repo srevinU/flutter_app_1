@@ -18,12 +18,12 @@ class Repository {
     }
   }
 
-  dynamic insertRecord(List<Map<String, dynamic>>? record) async {
+  dynamic insertRecord(List<Map<String, dynamic>> record) async {
     PgDb myDb = PgDb();
     try {
       await myDb.open();
       return await myDb.query(getInsertQuery(),
-          substitutionValues: record?.first);
+          substitutionValues: record.first);
     } catch (err) {
       printError("From repo: $err");
       rethrow;

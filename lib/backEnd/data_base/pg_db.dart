@@ -4,7 +4,7 @@ class PgDb extends PostgreSQLConnection {
   PgDb(
       {final String myHost = "localhost",
       final int myPort = 5432,
-      final String myDatabaseName = "flutter_app_db",
+      final String myDatabaseName = "db_flutter_app_1",
       final String userName = "postgres",
       final String passWord = "",
       final String timeZ = 'UTC',

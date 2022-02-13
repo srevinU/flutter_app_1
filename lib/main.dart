@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backend/common/printer.dart';
+import 'package:flutter_application_1/backEnd/entities/person.dart';
 import 'package:flutter_application_1/form.dart';
 import './backEnd/repository/repo_person.dart';
 import 'list.dart';
@@ -32,10 +32,24 @@ class PeopleHomePage extends StatefulWidget {
 class _PeopleHomePageState extends State<PeopleHomePage> {
   RepoPerson repoPerson = RepoPerson();
 
-  void addOnePeople() {
-    setState(() {
-      repoPerson.insertRecord(repoPerson.getRecordTest());
-    });
+  // void addOnePeople() {
+  //   setState(() {
+  //     repoPerson.insertRecord(repoPerson.getRecordTest());
+  //   });
+  // }
+
+  Future<void> addOnePeople(Object record) async {
+    print("Info to display1:");
+    print(record);
+    // https://www.bezkoder.com/dart-flutter-convert-object-to-json-string/
+    List<Map<String, dynamic>> recordMapped =
+        record as List<Map<String, dynamic>>;
+    print("Info to display2:");
+    print(recordMapped);
+    await repoPerson.insertRecord(recordMapped);
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> delOnePeople(sysUuid) async {
@@ -92,11 +106,12 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
                         alignment: Alignment.centerRight,
                         child: FloatingActionButton(
                           onPressed: () => Navigator.push(
-                              /*addOnePeople */
+                              // addOnePeople
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      PeopleForm(addOnePeople: addOnePeople))),
+                                  builder: (context) => PeopleForm(
+                                      type: Type.add,
+                                      addFunction: addOnePeople))),
                           tooltip: 'Add people',
                           child: const Icon(Icons.add),
                         ),

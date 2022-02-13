@@ -1,9 +1,10 @@
+import 'package:flutter_application_1/backEnd/common/printer.dart';
 import 'package:flutter_application_1/backEnd/entities/entity.dart';
 
 class Person extends Entity {
   @override
   // ignore: overridden_fields
-  String sysUuid;
+  String? sysUuid;
   String name;
   String birthDate;
   String phone;
@@ -14,7 +15,7 @@ class Person extends Entity {
   String postalCode;
 
   Person(
-      {required this.sysUuid,
+      {this.sysUuid,
       required this.name,
       required this.birthDate,
       required this.phone,
@@ -26,15 +27,34 @@ class Person extends Entity {
       : super(sysUuid: sysUuid);
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
-    return Person(
-        sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
-        name: (parsedJson['u_name'] ?? "") as String,
-        birthDate: (parsedJson['u_birthDate'] ?? "") as String,
-        phone: (parsedJson['u_phone'] ?? "") as String,
-        email: (parsedJson['u_email'] ?? "") as String,
-        gender: (parsedJson['u_gender'] ?? "") as String,
-        streetAddress: (parsedJson['u_streetAddress'] ?? "") as String,
-        country: (parsedJson['u_country'] ?? "") as String,
-        postalCode: (parsedJson['u_postalCode'] ?? "") as String);
+    printError("Issue from Person object");
+    print("parsedJson: ${parsedJson}");
+    print("Street address: ${parsedJson['u_birthDate']}");
+    Person result = Person(
+      sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
+      name: (parsedJson['u_name'] ?? "") as String,
+      phone: (parsedJson['u_phone'] ?? "") as String,
+      email: (parsedJson['u_email'] ?? "") as String,
+      gender: (parsedJson['u_gender'] ?? "") as String,
+      streetAddress: (parsedJson['u_streetAddress'] ?? "") as String,
+      country: (parsedJson['u_country'] ?? "") as String,
+      postalCode: (parsedJson['u_postalCode'] ?? "") as String,
+      birthDate: (parsedJson['u_birthDate'] ?? "") as String,
+    );
+    return result;
   }
+
+  @override
+  Map<String, dynamic> toJson() => {
+        "sys_uuid": sysUuid,
+        "u_name": name,
+        "u_birthDate": birthDate,
+        "u_phone": phone,
+        "u_email": email,
+        "u_gender": gender,
+        "u_streetAddress": streetAddress,
+        "u_country": country,
+        "u_postalCode": postalCode,
+        "sys_type": "person"
+      };
 }
