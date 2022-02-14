@@ -1,0 +1,10 @@
+Create Super admin role
+```
+CREATE ROLE super_admin WITH LOGIN PASSWORD 'superadmin123';
+ALTER ROLE super_admin Superuser;
+```
+Create admin role
+```
+CREATE ROLE admin WITH LOGIN PASSWORD 'admin123';
+ALTER ROLE admin CREATEDB;
+```
