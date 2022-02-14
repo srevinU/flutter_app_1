@@ -1,5 +1,5 @@
-import 'package:flutter_application_1/backEnd/common/printer.dart';
 import 'package:flutter_application_1/backEnd/entities/entity.dart';
+import 'package:flutter_application_1/backend/common/printer.dart';
 
 class Person extends Entity {
   @override
@@ -28,8 +28,8 @@ class Person extends Entity {
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     printError("Issue from Person object");
-    print("parsedJson: ${parsedJson}");
-    print("Street address: ${parsedJson['u_birthDate']}");
+    printWarning("parsedJson: ${parsedJson}");
+    printWarning("Street address: ${parsedJson['u_birthDate']}");
     Person result = Person(
       sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
       name: (parsedJson['u_name'] ?? "") as String,
