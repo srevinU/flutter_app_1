@@ -22,13 +22,13 @@ class RepoPerson extends Repository {
   List<String> getParams() {
     return [
       "u_name",
-      "u_birthDate",
+      "u_birth_date",
       "u_phone",
       "u_email",
       "u_gender",
-      "u_streetAddress",
+      "u_street_address",
       "u_country",
-      "u_postalCode",
+      "u_postal_code",
       "sys_type"
     ];
   }

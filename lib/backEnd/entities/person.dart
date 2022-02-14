@@ -27,19 +27,16 @@ class Person extends Entity {
       : super(sysUuid: sysUuid);
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
-    printError("Issue from Person object");
-    printWarning("parsedJson: ${parsedJson}");
-    printWarning("Street address: ${parsedJson['u_birthDate']}");
     Person result = Person(
       sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
       name: (parsedJson['u_name'] ?? "") as String,
       phone: (parsedJson['u_phone'] ?? "") as String,
       email: (parsedJson['u_email'] ?? "") as String,
       gender: (parsedJson['u_gender'] ?? "") as String,
-      streetAddress: (parsedJson['u_streetAddress'] ?? "") as String,
+      streetAddress: (parsedJson['u_street_address'] ?? "") as String,
       country: (parsedJson['u_country'] ?? "") as String,
-      postalCode: (parsedJson['u_postalCode'] ?? "") as String,
-      birthDate: (parsedJson['u_birthDate'] ?? "") as String,
+      postalCode: (parsedJson['u_postal_code'] ?? "") as String,
+      birthDate: (parsedJson['u_birth_date'].toString()),
     );
     return result;
   }
@@ -48,13 +45,13 @@ class Person extends Entity {
   Map<String, dynamic> toJson() => {
         "sys_uuid": sysUuid,
         "u_name": name,
-        "u_birthDate": birthDate,
+        "u_birth_date": birthDate,
         "u_phone": phone,
         "u_email": email,
         "u_gender": gender,
-        "u_streetAddress": streetAddress,
+        "u_street_address": streetAddress,
         "u_country": country,
-        "u_postalCode": postalCode,
+        "u_postal_code": postalCode,
         "sys_type": "person"
       };
 }

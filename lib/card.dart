@@ -16,8 +16,8 @@ class PeopleCard extends StatelessWidget {
           /*peopleForm */
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                PeopleForm(type: Type.read, record: person, addFunction: null),
+            builder: (context) => PeopleForm(
+                type: Type.read, record: person, addOrSaveFunction: null),
           ),
         ),
         child: Card(

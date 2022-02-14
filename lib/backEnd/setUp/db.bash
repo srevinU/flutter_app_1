@@ -77,15 +77,15 @@ psql ${dbName} -U postgres -c "CREATE TABLE t_person(
   sys_uuid uuid DEFAULT uuid_generate_v4()
   ,sys_context     VARCHAR(50) NULL
   ,sys_type        VARCHAR(50) NOT NULL
-  ,u_streetAddress VARCHAR(120) NOT NULL
+  ,u_street_address VARCHAR(120) NOT NULL
   ,u_country       VARCHAR(60) NOT NULL
-  ,u_postalCode    VARCHAR(30) NOT NULL
+  ,u_postal_code    VARCHAR(30) NOT NULL
   ,u_email         VARCHAR(50) NOT NULL UNIQUE
   ,sys_image       VARCHAR(50) NULL
-  ,u_jobTitle      VARCHAR(50) NULL
+  ,u_job_title      VARCHAR(50) NULL
   ,u_name          VARCHAR(50) NOT NULL
-  ,u_birthPlace    VARCHAR(60) NULL
-  ,u_birthDate     DATE NOT NULL
+  ,u_birth_place    VARCHAR(60) NULL
+  ,u_birth_date     DATE NOT NULL
   ,u_height        INTEGER NULL
   ,u_gender        VARCHAR(50) NOT NULL
   ,u_nationality   VARCHAR(60) NULL

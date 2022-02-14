@@ -6,10 +6,10 @@ enum Type { read, add, save }
 class PeopleForm extends StatefulWidget {
   final Type type;
   final Person? record;
-  final Function? addFunction;
+  final Function? addOrSaveFunction;
 
   const PeopleForm(
-      {Key? key, required this.type, this.record, this.addFunction})
+      {Key? key, required this.type, this.record, this.addOrSaveFunction})
       : super(key: key);
 
   @override
@@ -25,6 +25,7 @@ class _Peopleform extends State<PeopleForm> {
     return value == null || value.isEmpty ? 'Please enter some text' : null;
   }
 
+  TextEditingController personSysUuidCtler = TextEditingController();
   TextEditingController personNameCtler = TextEditingController();
   TextEditingController birthDateCtler = TextEditingController();
   TextEditingController phoneCtler = TextEditingController();
@@ -37,6 +38,7 @@ class _Peopleform extends State<PeopleForm> {
   @override
   Widget build(BuildContext context) {
     if (widget.type == Type.read) {
+      personSysUuidCtler.text = widget.record!.sysUuid!;
       personNameCtler.text = widget.record!.name;
       birthDateCtler.text = widget.record!.birthDate;
       phoneCtler.text = widget.record!.phone;
@@ -106,19 +108,42 @@ class _Peopleform extends State<PeopleForm> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Adding new person.')),
                         );
-
                         Person myTestPers = Person(
-                            name: personNameCtler.text.toLowerCase(),
+                            name: personNameCtler.text,
                             birthDate: birthDateCtler.text,
                             phone: phoneCtler.text,
                             email: emailCtler.text,
                             gender: genderCtler.text.toLowerCase(),
-                            streetAddress:
-                                streetAddressCtler.text.toLowerCase(),
-                            country: countryCtler.text.toLowerCase(),
+                            streetAddress: streetAddressCtler.text,
+                            country: countryCtler.text,
                             postalCode: postalCodeCtler.text);
 
-                        widget.addFunction!([myTestPers.toJson()]);
+                        widget.addOrSaveFunction!([myTestPers.toJson()]);
+                      }
+                    },
+                  ),
+                ),
+              if (widget.type == Type.read)
+                Align(
+                  child: ElevatedButton(
+                    child: const Text("Save"),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Adding new person.')),
+                        );
+                        Person myTestPers = Person(
+                            sysUuid: personSysUuidCtler.text,
+                            name: personNameCtler.text,
+                            birthDate: birthDateCtler.text,
+                            phone: phoneCtler.text,
+                            email: emailCtler.text,
+                            gender: genderCtler.text.toLowerCase(),
+                            streetAddress: streetAddressCtler.text,
+                            country: countryCtler.text,
+                            postalCode: postalCodeCtler.text);
+
+                        widget.addOrSaveFunction!([myTestPers.toJson()]);
                       }
                     },
                   ),

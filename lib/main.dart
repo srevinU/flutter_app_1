@@ -39,14 +39,19 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
   // }
 
   Future<void> addOnePeople(Object record) async {
-    print("Info to display1:");
-    print(record);
-    // https://www.bezkoder.com/dart-flutter-convert-object-to-json-string/
     List<Map<String, dynamic>> recordMapped =
         record as List<Map<String, dynamic>>;
-    print("Info to display2:");
-    print(recordMapped);
     await repoPerson.insertRecord(recordMapped);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  // To continue
+  Future<void> savePeopleData(Object record) async {
+    List<Map<String, dynamic>> recordMapped =
+        record as List<Map<String, dynamic>>;
+    await repoPerson.updateRecord(recordMapped);
     if (mounted) {
       setState(() {});
     }
@@ -111,7 +116,7 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
                               MaterialPageRoute(
                                   builder: (context) => PeopleForm(
                                       type: Type.add,
-                                      addFunction: addOnePeople))),
+                                      addOrSaveFunction: addOnePeople))),
                           tooltip: 'Add people',
                           child: const Icon(Icons.add),
                         ),
