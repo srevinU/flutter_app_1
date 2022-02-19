@@ -1,5 +1,4 @@
 import 'package:flutter_application_1/backEnd/entities/entity.dart';
-import 'package:flutter_application_1/backend/common/printer.dart';
 
 class Person extends Entity {
   @override
