@@ -71,7 +71,7 @@ class Repository {
 
   String getUpdateQuery() {
     String params = getParams().map((field) => field + '=@' + field).join(',');
-    return "UPDATE $table SET $params WHERE sys_uuid=@sysUuid RETURNING sys_uuid";
+    return "UPDATE $table SET $params WHERE sys_uuid=@sys_uuid RETURNING sys_uuid";
   }
 
   String getDeleteQuery() {

@@ -1,9 +1,9 @@
 import 'package:flutter_application_1/backEnd/Repository/repository.dart';
 
-class RepoPerson extends Repository {
+class RepoCategory extends Repository {
   @override
   // ignore: overridden_fields
-  String table = "t_person";
+  String table = "t_category";
 
   //********************************************************* Data event *****\\
   // Nested in Repository parent
@@ -20,17 +20,7 @@ class RepoPerson extends Repository {
   //****************************************************** Params&Values *****\\
   @override
   List<String> getParams() {
-    return [
-      "u_name",
-      "u_birth_date",
-      "u_phone",
-      "u_email",
-      "u_gender",
-      "u_street_address",
-      "u_country",
-      "u_postal_code",
-      "sys_type"
-    ];
+    return ["u_name", "u_color", "u_description"];
   }
 
   //************************************************************** Tests *****\\
@@ -40,26 +30,15 @@ class RepoPerson extends Repository {
   List<Map<String, dynamic>> getRecordTest() {
     return [
       {
-        "context": "https://schema.org",
-        "sys_type": "Person",
-        "u_street_address": "100 Main Street",
-        "u_country": "America",
-        "u_postal_code": "80840",
-        "u_email": "info@example.com",
-        "sys_image": "janedoe.jpg",
-        "u_job_title": "Research Assistant",
-        "u_name": "Jane Doe TEST**",
-        "alumniOf": "Dartmouth",
-        "u_birth_date": "1979-10-12",
-        "u_gender": "female",
-        "u_phone": "(123) 456-6789",
-        "sys_url": "http://www.example.com",
+        "u_name": "Category test",
+        "u_color": "Blue",
+        "u_description": "This is a category unit test"
       }
     ];
   }
 }
 
 Future<void> main() async {
-  RepoPerson rep = RepoPerson();
+  RepoCategory rep = RepoCategory();
   rep.runTest();
 }

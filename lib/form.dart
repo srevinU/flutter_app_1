@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/backEnd/common/printer.dart';
 import 'backEnd/entities/person.dart';
 
 enum Type { read, add, save }
@@ -99,55 +100,36 @@ class _Peopleform extends State<PeopleForm> {
                 decoration: const InputDecoration(labelText: "Postal code"),
                 validator: (value) => _fieldValidator(value),
               ),
-              if (widget.type == Type.add)
-                Align(
-                  child: ElevatedButton(
-                    child: const Text("Add"),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Adding new person.')),
-                        );
-                        Person myTestPers = Person(
-                            name: personNameCtler.text,
-                            birthDate: birthDateCtler.text,
-                            phone: phoneCtler.text,
-                            email: emailCtler.text,
-                            gender: genderCtler.text.toLowerCase(),
-                            streetAddress: streetAddressCtler.text,
-                            country: countryCtler.text,
-                            postalCode: postalCodeCtler.text);
+              Align(
+                child: ElevatedButton(
+                  child: (widget.type == Type.add)
+                      ? const Text("Add")
+                      : const Text("Save"),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        (widget.type == Type.add)
+                            ? const SnackBar(content: Text('Submiting'))
+                            : const SnackBar(content: Text('Saving...')),
+                      );
+                      Person myTestPers = Person(
+                          sysUuid: (widget.type == Type.add)
+                              ? null
+                              : personSysUuidCtler.text,
+                          name: personNameCtler.text,
+                          birthDate: birthDateCtler.text,
+                          phone: phoneCtler.text,
+                          email: emailCtler.text,
+                          gender: genderCtler.text.toLowerCase(),
+                          streetAddress: streetAddressCtler.text,
+                          country: countryCtler.text,
+                          postalCode: postalCodeCtler.text);
 
-                        widget.addOrSaveFunction!([myTestPers.toJson()]);
-                      }
-                    },
-                  ),
+                      widget.addOrSaveFunction!([myTestPers.toJson()]);
+                    }
+                  },
                 ),
-              if (widget.type == Type.read)
-                Align(
-                  child: ElevatedButton(
-                    child: const Text("Save"),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Adding new person.')),
-                        );
-                        Person myTestPers = Person(
-                            sysUuid: personSysUuidCtler.text,
-                            name: personNameCtler.text,
-                            birthDate: birthDateCtler.text,
-                            phone: phoneCtler.text,
-                            email: emailCtler.text,
-                            gender: genderCtler.text.toLowerCase(),
-                            streetAddress: streetAddressCtler.text,
-                            country: countryCtler.text,
-                            postalCode: postalCodeCtler.text);
-
-                        widget.addOrSaveFunction!([myTestPers.toJson()]);
-                      }
-                    },
-                  ),
-                )
+              ),
             ],
           )),
     );

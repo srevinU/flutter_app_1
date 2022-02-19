@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/person.dart';
 import 'package:flutter_application_1/form.dart';
 import './backEnd/repository/repo_person.dart';
 import 'list.dart';
@@ -31,12 +30,6 @@ class PeopleHomePage extends StatefulWidget {
 
 class _PeopleHomePageState extends State<PeopleHomePage> {
   RepoPerson repoPerson = RepoPerson();
-
-  // void addOnePeople() {
-  //   setState(() {
-  //     repoPerson.insertRecord(repoPerson.getRecordTest());
-  //   });
-  // }
 
   Future<void> addOnePeople(Object record) async {
     List<Map<String, dynamic>> recordMapped =
@@ -85,8 +78,10 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
               height: 660,
               decoration: const BoxDecoration(color: Colors.white),
               child: PeopleCardList(
-                  getPeoples: repoPerson.getRecords,
-                  delOnePeople: delOnePeople),
+                getPeoples: repoPerson.getRecords,
+                delOnePeople: delOnePeople,
+                savePeople: savePeopleData,
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(right: 25),

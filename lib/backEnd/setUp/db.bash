@@ -41,30 +41,17 @@ psql ${dbName} -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
 checkError
 displayInfo "Database" $dbName "Created"
 
-# Type table creation
-table='t_type'
-displayInfo "Table" $table "setUp"
-# psql ${dbName} -U postgres -c "DROP TABLE IF EXISTS ${table}"
-psql ${dbName} -U postgres -c "CREATE TABLE ${table}(
-  sys_uuid uuid DEFAULT uuid_generate_v4 ()
-  ,sys_name        VARCHAR(50) NOT NULL UNIQUE
-  ,PRIMARY KEY (sys_uuid)
-);"
-checkError
-displayInfo "Table" $table "Created"
-
-
 # Category table creation
 table='t_category'
 displayInfo "Table" $table "setUp"
 # psql ${dbName} -U postgres -c "DROP TABLE IF EXISTS ${table}"
 psql ${dbName} -U postgres -c "CREATE TABLE ${table}(
   sys_uuid uuid DEFAULT uuid_generate_v4()
-  ,sys_type uuid NOT NULL
-  ,sys_cat_name VARCHAR(50) NOT NULL
-  ,UNIQUE(sys_type, sys_cat_name)
+  ,u_name VARCHAR(50) NOT NULL
+  ,u_color VARCHAR(25) NULL
+  ,u_description VARCHAR(250) NULL
+  ,UNIQUE(sys_uuid, u_name)
   ,PRIMARY KEY (sys_uuid)
-  ,CONSTRAINT fk_type FOREIGN KEY(sys_type) REFERENCES t_type(sys_uuid)
 );"
 checkError
 displayInfo "Table" $table "Created"
@@ -84,14 +71,12 @@ psql ${dbName} -U postgres -c "CREATE TABLE t_person(
   ,sys_image       VARCHAR(50) NULL
   ,u_job_title      VARCHAR(50) NULL
   ,u_name          VARCHAR(50) NOT NULL
-  ,u_birth_place    VARCHAR(60) NULL
   ,u_birth_date     DATE NOT NULL
-  ,u_height        INTEGER NULL
   ,u_gender        VARCHAR(50) NOT NULL
-  ,u_nationality   VARCHAR(60) NULL
   ,u_phone         VARCHAR(50) NULL UNIQUE
   ,sys_url         VARCHAR(50) NULL
   ,sys_category    uuid NULL
+  ,UNIQUE(sys_uuid)
   ,PRIMARY KEY (sys_uuid)
   ,CONSTRAINT fk_category FOREIGN KEY(sys_category) REFERENCES t_category(sys_uuid)  
 );"

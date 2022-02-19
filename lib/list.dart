@@ -5,8 +5,12 @@ import 'card.dart';
 class PeopleCardList extends StatelessWidget {
   final Function getPeoples;
   final Function delOnePeople;
+  final Function savePeople;
   const PeopleCardList(
-      {Key? key, required this.getPeoples, required this.delOnePeople})
+      {Key? key,
+      required this.getPeoples,
+      required this.delOnePeople,
+      required this.savePeople})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -53,8 +57,11 @@ class PeopleCardList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child:
-                        PeopleCard(person: Person.fromJson(item), index: index),
+                    child: PeopleCard(
+                      person: Person.fromJson(item),
+                      index: index,
+                      savePeopleModified: savePeople,
+                    ),
                   );
                 });
           } else {

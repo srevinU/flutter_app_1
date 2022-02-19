@@ -5,7 +5,12 @@ import 'form.dart';
 class PeopleCard extends StatelessWidget {
   final Person person;
   final int index;
-  const PeopleCard({Key? key, required this.person, required this.index})
+  final Function savePeopleModified;
+  const PeopleCard(
+      {Key? key,
+      required this.person,
+      required this.index,
+      required this.savePeopleModified})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,10 @@ class PeopleCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => PeopleForm(
-                type: Type.read, record: person, addOrSaveFunction: null),
+              type: Type.read,
+              record: person,
+              addOrSaveFunction: savePeopleModified,
+            ),
           ),
         ),
         child: Card(
