@@ -109,7 +109,9 @@ class _Peopleform extends State<PeopleForm> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         (widget.type == Type.add)
-                            ? const SnackBar(content: Text('Submiting'))
+                            ? const SnackBar(
+                                content: Text('Submiting new person...'),
+                              )
                             : const SnackBar(content: Text('Saving...')),
                       );
                       Person myTestPers = Person(

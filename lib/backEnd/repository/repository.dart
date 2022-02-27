@@ -100,14 +100,14 @@ class Repository {
       printSucess("getRecords()");
       // INSERT
       var uuidReturned = await insertRecord(record);
-      record[0]["sysUuid"] = uuidReturned[0][0];
+      record[0]["sys_uuid"] = uuidReturned[0][0];
       record[0]["u_name"] = "From test";
       printSucess("insertRecord()");
       //UPDATE
       await updateRecord(record);
       printSucess("updateRecord()");
       // DELETE
-      deleteRecord(record[0]["sysUuid"]);
+      deleteRecord(record[0]["sys_uuid"]);
       printSucess("deleteRecord()");
     } catch (err) {
       printError(err);

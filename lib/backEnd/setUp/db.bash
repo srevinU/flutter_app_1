@@ -68,7 +68,7 @@ psql ${dbName} -U postgres -c "CREATE TABLE t_person(
   ,u_country       VARCHAR(60) NOT NULL
   ,u_postal_code    VARCHAR(30) NOT NULL
   ,u_email         VARCHAR(50) NOT NULL UNIQUE
-  ,sys_image       VARCHAR(50) NULL
+  ,sys_image       VARCHAR(250) NULL
   ,u_job_title      VARCHAR(50) NULL
   ,u_name          VARCHAR(50) NOT NULL
   ,u_birth_date     DATE NOT NULL

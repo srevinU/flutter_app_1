@@ -46,14 +46,15 @@ class RepoPerson extends Repository {
         "u_country": "America",
         "u_postal_code": "80840",
         "u_email": "info@example.com",
-        "sys_image": "janedoe.jpg",
+        "sys_image":
+            "https://www.pinclipart.com/picdir/big/218-2189254_free-online-avatars-kid-characters-family-vector-for.png",
         "u_job_title": "Research Assistant",
         "u_name": "Jane Doe TEST**",
         "alumniOf": "Dartmouth",
         "u_birth_date": "1979-10-12",
         "u_gender": "female",
         "u_phone": "(123) 456-6789",
-        "sys_url": "http://www.example.com",
+        "sys_url": "http://www.example.com"
       }
     ];
   }

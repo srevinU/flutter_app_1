@@ -47,8 +47,14 @@ class PeopleCardList extends StatelessWidget {
                       items.removeAt(index);
                     },
                     background: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(80),
+                          bottomLeft: Radius.circular(80),
+                        ),
+                        color: Colors.red,
+                      ),
                       padding: const EdgeInsets.only(right: 15),
-                      color: Colors.red,
                       child: const Align(
                         alignment: Alignment.centerRight,
                         child: Icon(
