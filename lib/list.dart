@@ -46,21 +46,24 @@ class PeopleCardList extends StatelessWidget {
                       delOnePeople(item['sys_uuid']);
                       items.removeAt(index);
                     },
-                    background: Container(
+                    secondaryBackground: Container(
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(80),
-                          bottomLeft: Radius.circular(80),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
                         color: Colors.red,
                       ),
                       padding: const EdgeInsets.only(right: 15),
+                      margin: const EdgeInsets.only(bottom: 5),
                       child: const Align(
                         alignment: Alignment.centerRight,
                         child: Icon(
                           Icons.delete,
                           color: Colors.white,
                         ),
+                      ),
+                    ),
+                    background: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
                       ),
                     ),
                     child: PeopleCard(

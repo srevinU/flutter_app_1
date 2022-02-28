@@ -60,5 +60,5 @@ class RecordGenerator {
 
 main(List<String> args) {
   // RecordGenerator test = RecordGenerator();
-  // test.generatePerson(10);
+  // test.generatePerson(5);
 }

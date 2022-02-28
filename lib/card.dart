@@ -28,15 +28,18 @@ class PeopleCard extends StatelessWidget {
             ),
           ),
         ),
-        child: Card(
-          color: Colors.blue[400],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(25),
+            ),
+            color: Colors.blue,
           ),
+          margin: const EdgeInsets.only(bottom: 5),
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.all(2),
+                margin: const EdgeInsets.all(2),
                 height: 80,
                 width: 80,
                 child: Column(

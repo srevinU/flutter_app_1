@@ -76,7 +76,7 @@ class _PeopleHomePageState extends State<PeopleHomePage> {
               padding: const EdgeInsets.all(10),
               width: 400,
               height: 660,
-              decoration: const BoxDecoration(color: Colors.white),
+              color: Colors.transparent,
               child: PeopleCardList(
                 getPeoples: repoPerson.getRecords,
                 delOnePeople: delOnePeople,
