@@ -33,7 +33,7 @@ class PeopleCard extends StatelessWidget {
             borderRadius: BorderRadius.all(
               Radius.circular(25),
             ),
-            color: Colors.blue,
+            color: Colors.lightBlue,
           ),
           margin: const EdgeInsets.only(bottom: 5),
           child: Row(

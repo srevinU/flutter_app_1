@@ -10,23 +10,23 @@ class Header extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: size.height * 0.12,
+          height: size.height * 0.10,
           child: Stack(
             children: <Widget>[
               Container(
                 // 15% of the current devise used by end-user
-                height: size.height * 0.10,
+                height: size.height * 0.30,
                 decoration: const BoxDecoration(
                   color: Colors.lightBlue,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50.0),
-                    bottomRight: Radius.circular(50.0),
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25),
                   ),
                 ),
               ),
               // Position help to position the child at a different place
               Positioned(
-                bottom: 0,
+                bottom: 30,
                 left: 0,
                 right: 0,
                 child: Container(
