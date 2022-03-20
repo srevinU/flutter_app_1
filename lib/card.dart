@@ -40,7 +40,7 @@ class PeopleCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.all(2),
-                height: 80,
+                height: 105,
                 width: 80,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

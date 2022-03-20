@@ -3,20 +3,21 @@ import 'card.dart';
 import 'backEnd/entities/person.dart';
 import 'backEnd/repository/repo_person.dart';
 
-
 class PeopleCardList extends StatefulWidget {
-  const PeopleCardList({Key? key}) : super(key: key);
+  final String inputSearch;
+
+  const PeopleCardList({Key? key, required this.inputSearch}) : super(key: key);
+
   @override
   State<PeopleCardList> createState() => _PeopleCardList();
 }
 
 class _PeopleCardList extends State<PeopleCardList> {
-
   RepoPerson repoPerson = RepoPerson();
 
   Future<void> addOnePeople(Object record) async {
     List<Map<String, dynamic>> recordMapped =
-    record as List<Map<String, dynamic>>;
+        record as List<Map<String, dynamic>>;
     await repoPerson.insertRecord(recordMapped);
     if (mounted) {
       setState(() {});
@@ -25,7 +26,7 @@ class _PeopleCardList extends State<PeopleCardList> {
 
   Future<void> savePeopleData(Object record) async {
     List<Map<String, dynamic>> recordMapped =
-    record as List<Map<String, dynamic>>;
+        record as List<Map<String, dynamic>>;
     await repoPerson.updateRecord(recordMapped);
     if (mounted) {
       setState(() {});
@@ -67,34 +68,38 @@ class _PeopleCardList extends State<PeopleCardList> {
               itemCount: items?.length,
               itemBuilder: (BuildContext context, int index) {
                 final item = items![index]['t_person'];
-                return Dismissible(
-                  direction: DismissDirection.endToStart,
-                  key: ValueKey<String>(item['sys_uuid']),
-                  onDismissed: (DismissDirection direction) {
-                    delOnePeople(item['sys_uuid']);
-                    items.removeAt(index);
-                  },
-                  background: Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                      color: Colors.red,
-                    ),
-                    padding: const EdgeInsets.only(right: 15),
-                    margin: const EdgeInsets.only(bottom: 5),
-                    child: const Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(
-                        Icons.delete,
-                        color: Colors.white,
+                if (item['u_name'].contains(widget.inputSearch)) {
+                  return Dismissible(
+                    direction: DismissDirection.endToStart,
+                    key: ValueKey<String>(item['sys_uuid']),
+                    onDismissed: (DismissDirection direction) {
+                      delOnePeople(item['sys_uuid']);
+                      items.removeAt(index);
+                    },
+                    background: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        color: Colors.red,
+                      ),
+                      padding: const EdgeInsets.only(right: 15),
+                      margin: const EdgeInsets.only(bottom: 5),
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  child: PeopleCard(
-                    person: Person.fromJson(item),
-                    index: index,
-                    savePeopleModified: savePeopleData,
-                  ),
-                );
+                    child: PeopleCard(
+                      person: Person.fromJson(item),
+                      index: index,
+                      savePeopleModified: savePeopleData,
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               });
         } else {
           return const Center(

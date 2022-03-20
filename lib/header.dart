@@ -7,6 +7,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     // Take size of the current devise used by end-user
     Size size = MediaQuery.of(context).size;
+    String searchString = "";
     return Column(
       children: <Widget>[
         SizedBox(
@@ -41,14 +42,18 @@ class Header extends StatelessWidget {
                     boxShadow: const <BoxShadow>[
                       BoxShadow(
                         offset: Offset(0, 10),
-                        blurRadius: 50,
+                        // blurRadius: 50,
                         color: Colors.lightBlue,
                       ),
                     ],
                   ),
                   child: TextField(
                     onChanged: (inputValue) {
-                      /* Future search function */
+                      /* Future search function
+                      setState((){
+                        searchString = value;
+                      });
+                      */
                     },
                     decoration: InputDecoration(
                         hintText: "Search...",
