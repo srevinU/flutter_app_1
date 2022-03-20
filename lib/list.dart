@@ -1,22 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/common/printer.dart';
-import 'backEnd/entities/person.dart';
 import 'card.dart';
+import 'backEnd/entities/person.dart';
+import 'backEnd/repository/repo_person.dart';
 
-class PeopleCardList extends StatelessWidget {
-  final Function getPeoples;
-  final Function delOnePeople;
-  final Function savePeople;
-  const PeopleCardList(
-      {Key? key,
-      required this.getPeoples,
-      required this.delOnePeople,
-      required this.savePeople})
-      : super(key: key);
+
+class PeopleCardList extends StatefulWidget {
+  const PeopleCardList({Key? key}) : super(key: key);
+  @override
+  State<PeopleCardList> createState() => _PeopleCardList();
+}
+
+class _PeopleCardList extends State<PeopleCardList> {
+
+  RepoPerson repoPerson = RepoPerson();
+
+  Future<void> addOnePeople(Object record) async {
+    List<Map<String, dynamic>> recordMapped =
+    record as List<Map<String, dynamic>>;
+    await repoPerson.insertRecord(recordMapped);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> savePeopleData(Object record) async {
+    List<Map<String, dynamic>> recordMapped =
+    record as List<Map<String, dynamic>>;
+    await repoPerson.updateRecord(recordMapped);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> delOnePeople(sysUuid) async {
+    await repoPerson.deleteRecord(sysUuid);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getPeoples(),
+      future: repoPerson.getRecords(),
       builder: (BuildContext context,
           AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         if (snapshot.hasError) {
@@ -66,7 +92,7 @@ class PeopleCardList extends StatelessWidget {
                   child: PeopleCard(
                     person: Person.fromJson(item),
                     index: index,
-                    savePeopleModified: savePeople,
+                    savePeopleModified: savePeopleData,
                   ),
                 );
               });

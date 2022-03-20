@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'header.dart';
-import 'list2.dart';
+import 'list.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
           width: 400,
           height: 566.6,
           color: Colors.transparent,
-          child: PeopleCardList(),
+          child: const PeopleCardList(),
         ),
       ],
     );
