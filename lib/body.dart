@@ -3,7 +3,8 @@ import 'header.dart';
 import 'list.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  final Function addFunction;
+  const Body({Key? key, required this.addFunction}) : super(key: key);
 
   @override
   State<Body> createState() => _Body();
@@ -59,7 +60,7 @@ class _Body extends State<Body> {
                       ),
                       child: TextField(
                         onChanged: (inputValue) {
-                          // Future search function
+                          // List search function
                           setState(() {
                             searchString = inputValue;
                           });
@@ -85,7 +86,7 @@ class _Body extends State<Body> {
           width: 400,
           height: size.height * 0.67,
           color: Colors.transparent,
-          child: PeopleCardList(inputSearch: searchString),
+          child: PeopleCardList(inputSearch: searchString, addOnePeople: widget.addFunction),
         ),
       ],
     );

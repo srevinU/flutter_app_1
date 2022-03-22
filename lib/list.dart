@@ -5,8 +5,9 @@ import 'backEnd/repository/repo_person.dart';
 
 class PeopleCardList extends StatefulWidget {
   final String inputSearch;
+  final Function addOnePeople;
 
-  const PeopleCardList({Key? key, required this.inputSearch}) : super(key: key);
+  const PeopleCardList({Key? key, required this.inputSearch, required this.addOnePeople}) : super(key: key);
 
   @override
   State<PeopleCardList> createState() => _PeopleCardList();
@@ -14,15 +15,6 @@ class PeopleCardList extends StatefulWidget {
 
 class _PeopleCardList extends State<PeopleCardList> {
   RepoPerson repoPerson = RepoPerson();
-
-  Future<void> addOnePeople(Object record) async {
-    List<Map<String, dynamic>> recordMapped =
-        record as List<Map<String, dynamic>>;
-    await repoPerson.insertRecord(recordMapped);
-    if (mounted) {
-      setState(() {});
-    }
-  }
 
   Future<void> savePeopleData(Object record) async {
     List<Map<String, dynamic>> recordMapped =

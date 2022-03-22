@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/common/printer.dart';
 import 'backEnd/entities/person.dart';
 
 enum Type { read, add, save }
@@ -52,7 +51,8 @@ class _Peopleform extends State<PeopleForm> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("People Form"),
+        elevation: 0,
+        backgroundColor: Colors.lightBlue,
       ),
       body: Form(
           key: _formKey,

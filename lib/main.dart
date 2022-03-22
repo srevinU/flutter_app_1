@@ -23,8 +23,10 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+
   @override
   State<HomePage> createState() => _HomePage();
+
 }
 
 class _HomePage extends State<HomePage> {
@@ -54,7 +56,7 @@ class _HomePage extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.delete), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
         ],
       ),
     );
@@ -63,13 +65,13 @@ class _HomePage extends State<HomePage> {
   Widget? getBody () {
     switch (_currentIndex) {
       case 0:
-        return const Body();
+        return Body(addFunction: this.addOnePeople);
       case 1:
         return PeopleForm(
             type: Type.add,
             addOrSaveFunction: addOnePeople);
       case 2:
-        return const Body();
+        return const SizedBox.shrink();
     }
   }
 }
