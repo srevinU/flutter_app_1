@@ -29,6 +29,7 @@ class RepoPerson extends Repository {
       "u_street_address",
       "u_country",
       "u_postal_code",
+      "u_photo",
       "sys_type"
     ];
   }
@@ -54,7 +55,8 @@ class RepoPerson extends Repository {
         "u_birth_date": "1979-10-12",
         "u_gender": "female",
         "u_phone": "(123) 456-6789",
-        "sys_url": "http://www.example.com"
+        "sys_url": "http://www.example.com",
+        "u_photo": ""
       }
     ];
   }

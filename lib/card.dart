@@ -1,6 +1,8 @@
+import 'form.dart';
 import 'package:flutter/material.dart';
 import 'backEnd/entities/person.dart';
-import 'form.dart';
+import 'backEnd/common/generator.dart';
+import 'dart:math';
 
 class PeopleCard extends StatelessWidget {
   final Person person;
@@ -16,6 +18,7 @@ class PeopleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RecordGenerator Generator = RecordGenerator();
     return Center(
       child: Container(
         padding: const EdgeInsets.only(bottom: 8),
@@ -54,14 +57,18 @@ class PeopleCard extends StatelessWidget {
                   width: 80,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       CircleAvatar(
                         backgroundColor: Colors.white,
-                        radius: 26,
+                        radius: 27,
                         child: CircleAvatar(
-                          radius: 24,
-                          backgroundImage: NetworkImage(
-                              "https://www.pinclipart.com/picdir/big/218-2189254_free-online-avatars-kid-characters-family-vector-for.png"),
+                          radius: 25,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image(
+                                image: AssetImage(
+                                    "assets/persons/${person.photo}")),
+                          ),
                         ),
                       ),
                     ],

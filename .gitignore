@@ -45,3 +45,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 .env*
+
+# Images
+/assets
+
+# Sensitive classes
+/lib/backEnd/common/generator.dart

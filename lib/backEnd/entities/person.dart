@@ -12,6 +12,7 @@ class Person extends Entity {
   String streetAddress;
   String country;
   String postalCode;
+  String? photo;
 
   Person(
       {this.sysUuid,
@@ -22,21 +23,22 @@ class Person extends Entity {
       required this.gender,
       required this.streetAddress,
       required this.country,
-      required this.postalCode})
+      required this.postalCode,
+      this.photo})
       : super(sysUuid: sysUuid);
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     Person result = Person(
-      sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
-      name: (parsedJson['u_name'] ?? "") as String,
-      phone: (parsedJson['u_phone'] ?? "") as String,
-      email: (parsedJson['u_email'] ?? "") as String,
-      gender: (parsedJson['u_gender'] ?? "") as String,
-      streetAddress: (parsedJson['u_street_address'] ?? "") as String,
-      country: (parsedJson['u_country'] ?? "") as String,
-      postalCode: (parsedJson['u_postal_code'] ?? "") as String,
-      birthDate: (parsedJson['u_birth_date'].toString()),
-    );
+        sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
+        name: (parsedJson['u_name'] ?? "") as String,
+        phone: (parsedJson['u_phone'] ?? "") as String,
+        email: (parsedJson['u_email'] ?? "") as String,
+        gender: (parsedJson['u_gender'] ?? "") as String,
+        streetAddress: (parsedJson['u_street_address'] ?? "") as String,
+        country: (parsedJson['u_country'] ?? "") as String,
+        postalCode: (parsedJson['u_postal_code'] ?? "") as String,
+        birthDate: (parsedJson['u_birth_date'].toString()),
+        photo: (parsedJson['u_photo'] ?? "") as String);
     return result;
   }
 
@@ -51,6 +53,7 @@ class Person extends Entity {
         "u_street_address": streetAddress,
         "u_country": country,
         "u_postal_code": postalCode,
+        "u_photo": photo,
         "sys_type": "person"
       };
 }
