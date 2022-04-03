@@ -23,10 +23,8 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-
   @override
   State<HomePage> createState() => _HomePage();
-
 }
 
 class _HomePage extends State<HomePage> {
@@ -35,7 +33,7 @@ class _HomePage extends State<HomePage> {
 
   Future<void> addOnePeople(Object record) async {
     List<Map<String, dynamic>> recordMapped =
-    record as List<Map<String, dynamic>>;
+        record as List<Map<String, dynamic>>;
     await repoPerson.insertRecord(recordMapped);
     if (mounted) {
       setState(() {});
@@ -44,8 +42,13 @@ class _HomePage extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color.fromRGBO(239, 239, 239, 1),
       appBar: AppBar(
-        title: const Text(""),
+        title: Text(
+          getAppBarTitle(),
+          style: const TextStyle(fontSize: 28),
+        ),
         elevation: 0,
         backgroundColor: Colors.lightBlue,
       ),
@@ -62,18 +65,28 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  Widget? getBody () {
+  Widget? getBody() {
     switch (_currentIndex) {
       case 0:
-        return Body(addFunction: this.addOnePeople);
+        return Body(addFunction: addOnePeople);
       case 1:
-        return PeopleForm(
-            type: Type.add,
-            addOrSaveFunction: addOnePeople);
+        return PeopleForm(type: Type.add, addOrSaveFunction: addOnePeople);
       case 2:
         return const SizedBox.shrink();
     }
   }
+
+  String getAppBarTitle() {
+    switch (_currentIndex) {
+      case 0:
+        return "My Contact App";
+      case 1:
+        return "Add a contact";
+      case 2:
+        return "Add a category";
+      default:
+        return "";
+    }
+  }
+
 }
-
-

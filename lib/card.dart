@@ -1,8 +1,6 @@
 import 'form.dart';
 import 'package:flutter/material.dart';
 import 'backEnd/entities/person.dart';
-import 'backEnd/common/generator.dart';
-import 'dart:math';
 
 class PeopleCard extends StatelessWidget {
   final Person person;
@@ -18,7 +16,6 @@ class PeopleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RecordGenerator Generator = RecordGenerator();
     return Center(
       child: Container(
         padding: const EdgeInsets.only(bottom: 8),
@@ -38,36 +35,34 @@ class PeopleCard extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(25),
+                Radius.circular(15),
               ),
               color: Colors.white,
-              boxShadow: <BoxShadow>[
+              /* boxShadow: <BoxShadow>[
                 BoxShadow(
                   offset: Offset(0, 10),
                   color: Colors.black12,
                 ),
-              ],
+              ], */
             ),
-            margin: const EdgeInsets.only(bottom: 5),
+            margin: const EdgeInsets.only(bottom: 1),
             child: Row(
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.all(2),
-                  height: 105,
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 5.0, vertical: 0),
+                  height: 90,
                   width: 80,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 27,
-                        child: CircleAvatar(
-                          radius: 25,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(25),
-                            child: Image(
-                                image: AssetImage(
-                                    "assets/persons/${person.photo}")),
+                        backgroundColor: Colors.transparent,
+                        radius: 35,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image(
+                            image: AssetImage("assets/persons/${person.photo}"),
                           ),
                         ),
                       ),
@@ -75,14 +70,34 @@ class PeopleCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(2),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   height: 80,
                   width: 180,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(person.name),
-                      Text(person.phone),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              person.name,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            person.phone,
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
