@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'body.dart';
-import 'form.dart';
+import 'PeopleForm.dart';
 import './backEnd/repository/repo_person.dart';
 
 void main() {
@@ -73,6 +73,8 @@ class _HomePage extends State<HomePage> {
         return PeopleForm(type: Type.add, addOrSaveFunction: addOnePeople);
       case 2:
         return const SizedBox.shrink();
+      default:
+        return const SizedBox.shrink();
     }
   }
 
@@ -88,5 +90,4 @@ class _HomePage extends State<HomePage> {
         return "";
     }
   }
-
 }

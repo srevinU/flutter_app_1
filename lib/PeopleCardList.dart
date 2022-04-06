@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'card.dart';
+import 'PeopleCard.dart';
 import 'backEnd/entities/person.dart';
 import 'backEnd/repository/repo_person.dart';
 

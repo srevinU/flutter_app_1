@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'header.dart';
-import 'list.dart';
+import 'PeopleForm.dart';
+import 'PeopleCardList.dart';
 
 class Body extends StatefulWidget {
   final Function addFunction;
+
   const Body({Key? key, required this.addFunction}) : super(key: key);
 
   @override
@@ -50,13 +51,6 @@ class _Body extends State<Body> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: const <BoxShadow>[
-                          BoxShadow(
-                            offset: Offset(0, 10),
-                            // blurRadius: 50,
-                            color: Colors.lightBlue,
-                          ),
-                        ],
                       ),
                       child: TextField(
                         onChanged: (inputValue) {

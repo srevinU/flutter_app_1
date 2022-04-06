@@ -1,4 +1,4 @@
-import 'form.dart';
+import 'PeopleForm.dart';
 import 'package:flutter/material.dart';
 import 'backEnd/entities/person.dart';
 
@@ -49,8 +49,8 @@ class PeopleCard extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 5.0, vertical: 0),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0),
                   height: 90,
                   width: 80,
                   child: Column(
@@ -72,7 +72,7 @@ class PeopleCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   height: 80,
-                  width: 180,
+                  width: 190,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -104,7 +104,7 @@ class PeopleCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(2),
                   height: 80,
-                  width: 100,
+                  width: 90,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [Text("Other info")],
