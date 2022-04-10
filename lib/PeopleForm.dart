@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'backEnd/entities/person.dart';
-import 'main.dart';
 
-enum Type { read, add, save }
+enum TypePeopleForm { read, add, save }
 
 class PeopleForm extends StatefulWidget {
-  final Type type;
+  final TypePeopleForm typePeopleForm;
   final Person? record;
   final Function? addOrSaveFunction;
 
   const PeopleForm(
-      {Key? key, required this.type, this.record, this.addOrSaveFunction})
+      {Key? key, required this.typePeopleForm, this.record, this.addOrSaveFunction})
       : super(key: key);
 
   @override
@@ -38,7 +37,7 @@ class _Peopleform extends State<PeopleForm> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.type == Type.read) {
+    if (widget.typePeopleForm == TypePeopleForm.read) {
       personSysUuidCtler.text = widget.record!.sysUuid!;
       personNameCtler.text = widget.record!.name;
       birthDateCtler.text = widget.record!.birthDate;
@@ -54,7 +53,7 @@ class _Peopleform extends State<PeopleForm> {
         widget.record?.photo ?? "deer_jumping_silhouette_animal.jpeg";
 
     return Scaffold(
-      appBar: (widget.type == Type.read) ? AppBar(
+      appBar: (widget.typePeopleForm == TypePeopleForm.read) ? AppBar(
         elevation: 0,
         backgroundColor: Colors.lightBlue,
       ) : null,
@@ -120,13 +119,13 @@ class _Peopleform extends State<PeopleForm> {
                 ),
                 Align(
                   child: ElevatedButton(
-                    child: (widget.type == Type.add)
+                    child: (widget.typePeopleForm == TypePeopleForm.add)
                         ? const Text("Add")
                         : const Text("Save"),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          (widget.type == Type.add)
+                          (widget.typePeopleForm == TypePeopleForm.add)
                               ? const SnackBar(
                                   content: Text('Submiting new record...'),
                                 )
@@ -134,7 +133,7 @@ class _Peopleform extends State<PeopleForm> {
                         );
 
                         Person myTestPers = Person(
-                            sysUuid: (widget.type == Type.add)
+                            sysUuid: (widget.typePeopleForm == TypePeopleForm.add)
                                 ? null
                                 : personSysUuidCtler.text,
                             name: personNameCtler.text,

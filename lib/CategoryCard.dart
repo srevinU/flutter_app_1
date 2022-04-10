@@ -1,17 +1,17 @@
-import 'PeopleForm.dart';
 import 'package:flutter/material.dart';
-import 'backEnd/entities/person.dart';
+import 'backEnd/entities/category.dart';
+import 'CategoryForm.dart';
 
-class PeopleCard extends StatelessWidget {
+class CategoryCard extends StatelessWidget {
   final int index;
-  final Person person;
-  final Function savePeopleModified;
+  final Category category;
+  final Function saveCategoryModified;
 
-  const PeopleCard(
+  const CategoryCard(
       {Key? key,
-      required this.person,
+      required this.category,
       required this.index,
-      required this.savePeopleModified})
+      required this.saveCategoryModified})
       : super(key: key);
 
   @override
@@ -25,11 +25,11 @@ class PeopleCard extends StatelessWidget {
             /*peopleForm */
             context,
             MaterialPageRoute(
-              builder: (context) => PeopleForm(
-                typePeopleForm: TypePeopleForm.read,
-                record: person,
-                addOrSaveFunction: savePeopleModified,
-              ),
+              builder: (context) => CategoryForm(
+                  typeCategoryForm: TypeCategoryForm.read,
+                  record: category,
+                  addOrSaveFunction: saveCategoryModified,
+                  ),
             ),
           ),
           child: Container(
@@ -62,7 +62,8 @@ class PeopleCard extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
                           child: Image(
-                            image: AssetImage("assets/persons/${person.photo}"),
+                            image: AssetImage(
+                                "assets/persons/${"No need to have category photo"}"),
                           ),
                         ),
                       ),
@@ -81,7 +82,7 @@ class PeopleCard extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
                             child: Text(
-                              person.name,
+                              category.name,
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class PeopleCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            person.phone,
+                            category.name,
                             style: const TextStyle(fontSize: 15),
                           ),
                         ],

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'body.dart';
 import 'PeopleForm.dart';
 import './backEnd/repository/repo_person.dart';
+import 'CategoryForm.dart';
+import 'backEnd/repository/repo_catagory.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,11 +32,21 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
   RepoPerson repoPerson = RepoPerson();
+  RepoCategory repoCategory = RepoCategory();
 
   Future<void> addOnePeople(Object record) async {
     List<Map<String, dynamic>> recordMapped =
         record as List<Map<String, dynamic>>;
     await repoPerson.insertRecord(recordMapped);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> addOneCategory(Object record) async {
+    List<Map<String, dynamic>> recordMapped =
+    record as List<Map<String, dynamic>>;
+    await repoCategory.insertRecord(recordMapped);
     if (mounted) {
       setState(() {});
     }
@@ -70,9 +82,9 @@ class _HomePage extends State<HomePage> {
       case 0:
         return Body(addFunction: addOnePeople);
       case 1:
-        return PeopleForm(type: Type.add, addOrSaveFunction: addOnePeople);
+        return PeopleForm(typePeopleForm: TypePeopleForm.add, addOrSaveFunction: addOnePeople);
       case 2:
-        return const SizedBox.shrink();
+        return CategoryForm(typeCategoryForm: TypeCategoryForm.add,  addOrSaveFunction: addOneCategory,);
       default:
         return const SizedBox.shrink();
     }
