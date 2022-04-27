@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/CategoryCardList.dart';
+import 'package:flutter_application_1/backEnd/entities/category.dart';
+import 'package:flutter_application_1/backEnd/entities/person.dart';
+import 'package:flutter_application_1/frontEnd/utils/AppList.dart';
 import 'body.dart';
-import 'PeopleForm.dart';
-import './backEnd/repository/repo_person.dart';
-import 'CategoryForm.dart';
-import 'backEnd/repository/repo_catagory.dart';
+import './backEnd/repository/RepoPerson.dart';
+import 'backEnd/repository/RepoCatagory.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,8 +71,8 @@ class _HomePage extends State<HomePage> {
         currentIndex: _currentIndex,
         onTap: (int index) => setState(() => _currentIndex = index),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: ""),
+          // BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
         ],
       ),
@@ -78,13 +80,19 @@ class _HomePage extends State<HomePage> {
   }
 
   Widget? getBody() {
+    String searchString = "";
     switch (_currentIndex) {
       case 0:
-        return Body(addFunction: addOnePeople);
+        // return Body(addFunction: addOnePeople);
+        return AppList(entity: Person, inputSearch: "", repositoryObject: repoPerson);
       case 1:
-        return PeopleForm(typePeopleForm: TypePeopleForm.add, addOrSaveFunction: addOnePeople);
+        // return PeopleForm(typePeopleForm: TypePeopleForm.add, addOrSaveFunction: addOnePeople);
+        // return CategoryCardList(inputSearch: searchString, addOnePeople: addOneCategory);
+        return AppList(entity: Category, inputSearch: "", repositoryObject: repoCategory);
       case 2:
-        return CategoryForm(typeCategoryForm: TypeCategoryForm.add,  addOrSaveFunction: addOneCategory,);
+        // return CategoryForm(typeCategoryForm: TypeCategoryForm.add,  addOrSaveFunction: addOneCategory,);
+        // return CategoryCardList(inputSearch: searchString, addOnePeople: widget.addFunction);
+        return CategoryCardList(inputSearch: searchString, addOnePeople: addOneCategory);
       default:
         return const SizedBox.shrink();
     }

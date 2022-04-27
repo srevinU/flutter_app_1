@@ -27,6 +27,7 @@ class Person extends Entity {
       this.photo})
       : super(sysUuid: sysUuid);
 
+  @override
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     Person result = Person(
         sysUuid: (parsedJson['sys_uuid'] ?? "") as String,

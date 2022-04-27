@@ -1,4 +1,5 @@
-import 'package:flutter_application_1/backEnd/Repository/repository.dart';
+import 'package:flutter_application_1/backEnd/entities/category.dart';
+import 'package:flutter_application_1/backEnd/Repository/Repository.dart';
 
 class RepoCategory extends Repository {
   @override

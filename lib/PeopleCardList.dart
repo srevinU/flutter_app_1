@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'PeopleCard.dart';
 import 'backEnd/entities/person.dart';
-import 'backEnd/repository/repo_person.dart';
+import 'backEnd/repository/RepoPerson.dart';
 
 class PeopleCardList extends StatefulWidget {
   final String inputSearch;
   final Function addOnePeople;
 
-  const PeopleCardList({Key? key, required this.inputSearch, required this.addOnePeople}) : super(key: key);
+  const PeopleCardList({
+    Key? key,
+    required this.inputSearch,
+    required this.addOnePeople,
+  }) : super(key: key);
 
   @override
   State<PeopleCardList> createState() => _PeopleCardList();

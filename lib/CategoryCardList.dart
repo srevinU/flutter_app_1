@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'backEnd/entities/category.dart';
-import 'backEnd/repository/repo_catagory.dart';
+import 'backEnd/repository/RepoCatagory.dart';
 import 'CategoryCard.dart';
 
 
@@ -60,7 +60,7 @@ class _CategoryCardListState extends State<CategoryCardList> {
           return ListView.builder(
               itemCount: items?.length,
               itemBuilder: (BuildContext context, int index) {
-                final item = items![index]['t_person'];
+                final item = items![index]['t_category'];
                 if (item['u_name'].contains(widget.inputSearch)) {
                   return Dismissible(
                     direction: DismissDirection.endToStart,

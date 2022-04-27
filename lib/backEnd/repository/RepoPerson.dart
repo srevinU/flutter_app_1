@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/backEnd/Repository/repository.dart';
+import 'package:flutter_application_1/backEnd/Repository/Repository.dart';
 
 class RepoPerson extends Repository {
   @override

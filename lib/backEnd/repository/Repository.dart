@@ -1,3 +1,4 @@
+import 'dart:developer';
 import '../data_base/pg_db.dart';
 import '../common/printer.dart';
 
@@ -84,7 +85,7 @@ class Repository {
     return [];
   }
 
-  //**************************************************************** Tests *****\\
+  //************************************************************** Tests *****\\
 
   List<Map<String, dynamic>> getRecordTest() {
     return [
@@ -97,6 +98,7 @@ class Repository {
     try {
       // GET
       var data = await getRecords();
+      // print(inspect(data));
       printSucess("getRecords()");
       // INSERT
       var uuidReturned = await insertRecord(record);
