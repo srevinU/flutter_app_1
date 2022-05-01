@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 
 import '../repository/RepoPerson.dart';
 import '../repository/RepoCatagory.dart';
@@ -27,8 +26,9 @@ class RecordGenerator {
 
   List<String> _generateImagesFileName() {
     List<String> result = [];
-    Directory dir = Directory(
-        '/Users/cedricsegura/dev/perso/flutter_p/flutter_app_1/assets/persons');
+    Directory dir = Directory('/Users/cedric/dev/perso/flutter/flutter_app_1');
+    // /Users/cedric/dev/perso/flutter/flutter_app_1
+    // /Users/cedricsegura/dev/perso/flutter_p/flutter_app_1/assets/persons
     List images = dir.listSync();
     for (var image in images) {
       result.add(image.path.split("/").last);

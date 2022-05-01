@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/backEnd/entities/category.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppForm.dart';
-
-import '../../CategoryForm.dart';
+import 'package:flutter_application_1/frontEnd/utils/AppFormCategory.dart';
 
 class AppCardCategory extends StatelessWidget {
   final int index;
   final Category record;
   final Object repositoryObject;
+  final Function saveFunction;
 
-  const AppCardCategory({
-    Key? key,
-    required this.index,
-    required this.record,
-    required this.repositoryObject,
-  }) : super(key: key);
+  const AppCardCategory(
+      {Key? key,
+      required this.index,
+      required this.record,
+      required this.repositoryObject,
+      required this.saveFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class AppCardCategory extends StatelessWidget {
             /*peopleForm */
             context,
             MaterialPageRoute(
-              builder: (context) => appForm(
+              builder: (context) => AppFormCategory(
                   actionForm: ActionForm.read,
                   record: record,
                   repositoryObject: repositoryObject),
@@ -62,10 +62,11 @@ class AppCardCategory extends StatelessWidget {
                         radius: 35,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: Image(
+                          child: const SizedBox
+                              .shrink(), /* Image(
                             image: AssetImage(
                                 "assets/persons/${"No need to have category photo"}"),
-                          ),
+                          ), */
                         ),
                       ),
                     ],

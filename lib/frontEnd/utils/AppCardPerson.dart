@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/backEnd/entities/person.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppForm.dart';
+import 'package:flutter_application_1/frontEnd/utils/AppFormPerson.dart';
 
 class AppCardPerson extends StatelessWidget {
   final int index;
   final Person record;
   final Object repositoryObject;
+  final Function saveFunction;
 
   const AppCardPerson(
       {Key? key,
       required this.index,
       required this.record,
-      required this.repositoryObject})
+      required this.repositoryObject,
+      required this.saveFunction})
       : super(key: key);
 
   @override
@@ -25,10 +27,12 @@ class AppCardPerson extends StatelessWidget {
             /*peopleForm */
             context,
             MaterialPageRoute(
-              builder: (context) => appForm(
-                  actionForm: ActionForm.read,
-                  record: record,
-                  repositoryObject: repositoryObject),
+              builder: (context) => AppFormPerson(
+                actionForm: ActionForm.read,
+                record: record,
+                repositoryObject: repositoryObject,
+                saveData: saveFunction,
+              ),
             ),
           ),
           child: Container(

@@ -29,7 +29,7 @@ class Person extends Entity {
 
   @override
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
-    Person result = Person(
+    return Person(
         sysUuid: (parsedJson['sys_uuid'] ?? "") as String,
         name: (parsedJson['u_name'] ?? "") as String,
         phone: (parsedJson['u_phone'] ?? "") as String,
@@ -40,7 +40,6 @@ class Person extends Entity {
         postalCode: (parsedJson['u_postal_code'] ?? "") as String,
         birthDate: (parsedJson['u_birth_date'].toString()),
         photo: (parsedJson['u_photo'] ?? "") as String);
-    return result;
   }
 
   @override

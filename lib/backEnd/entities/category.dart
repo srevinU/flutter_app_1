@@ -13,11 +13,13 @@ class Category extends Entity {
       : super(sysUuid: sysUuid);
 
   @override
-  factory Category.fromJson(Map<String, String> parsedJson) => Category(
-      sysUuid: (parsedJson['sys_uuid'] ?? ""),
-      name: (parsedJson['u_name'] ?? ""),
-      color: (parsedJson['u_color'] ?? ""),
-      description: (parsedJson['u_description'] ?? ""));
+  factory Category.fromJson(Map<String, dynamic> parsedJson) {
+    return Category(
+        sysUuid: (parsedJson['sys_uuid'] ?? ""),
+        name: (parsedJson['u_name'] ?? ""),
+        color: (parsedJson['u_color'] ?? ""),
+        description: (parsedJson['u_description'] ?? ""));
+  }
 
   @override
   Map<String, dynamic> toJson() => {

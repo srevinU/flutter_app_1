@@ -5,13 +5,11 @@ import 'package:flutter_application_1/frontEnd/utils/AppCardCategory.dart';
 import 'package:flutter_application_1/frontEnd/utils/AppCardPerson.dart';
 
 class AppList extends StatefulWidget {
-  final Object entity;
   final Object repositoryObject;
   final String inputSearch;
 
   const AppList({
     Key? key,
-    required this.entity,
     required this.repositoryObject,
     required this.inputSearch,
   }) : super(key: key);
@@ -21,15 +19,18 @@ class AppList extends StatefulWidget {
 }
 
 class _AppListState extends State<AppList> {
-  late dynamic _currentEntity;
   late dynamic _currentRepository;
+
+  Future<void> savePeopleData(List<Map<String, dynamic>> record) async {
+    await _currentRepository.updateRecord(record);
+    if (mounted) {
+      setState(() => {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    _currentEntity = widget.entity;
     _currentRepository = widget.repositoryObject;
-
-    print("test ${_currentRepository.getRecords()}");
     return FutureBuilder(
       future: _currentRepository.getRecords(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -39,7 +40,8 @@ class _AppListState extends State<AppList> {
               itemCount: data?.length,
               itemBuilder: (BuildContext context, int index) {
                 final item = data![index][_currentRepository.table];
-                if (item['u_name'].contains(widget.inputSearch)) {
+                if (item != null &&
+                    item['u_name'].contains(widget.inputSearch)) {
                   return Dismissible(
                     key: ValueKey<String>(item['sys_uuid']),
                     direction: DismissDirection.endToStart,
@@ -57,16 +59,8 @@ class _AppListState extends State<AppList> {
                         color: Colors.red,
                       ),
                     ),
-                    child: _currentRepository.table == "t_person"
-                        ? AppCardPerson(
-                            index: index,
-                            record: Person.fromJson(item),
-                            repositoryObject: _currentRepository,
-                          )
-                        : AppCardCategory(
-                            index: index,
-                            record: Category.fromJson(item),
-                            repositoryObject: _currentRepository),
+                    child: getCard(index, _currentRepository.table,
+                        _currentRepository, item),
                   );
                 } else {
                   return const SizedBox.shrink();
@@ -95,5 +89,27 @@ class _AppListState extends State<AppList> {
         }
       },
     );
+  }
+
+  Widget getCard(int index, String tableName, Object repository,
+      Map<String, dynamic> record) {
+    switch (tableName) {
+      case "t_person":
+        return AppCardPerson(
+            index: index,
+            record: Person.fromJson(record),
+            repositoryObject: _currentRepository,
+            saveFunction: savePeopleData);
+
+      case "t_category":
+        return AppCardCategory(
+            index: index,
+            record: Category.fromJson(record),
+            repositoryObject: _currentRepository,
+            saveFunction: savePeopleData);
+
+      default:
+        return const SizedBox.shrink();
+    }
   }
 }
