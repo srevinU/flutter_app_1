@@ -3,25 +3,25 @@ import 'package:flutter_application_1/backEnd/entities/person.dart';
 
 enum ActionForm { read, add, save }
 
-class AppFormPerson extends StatefulWidget {
+class FormPerson extends StatefulWidget {
   final ActionForm actionForm;
   final Person record;
   final Object repositoryObject;
-  final Function saveData;
+  final Function saveOrAddFunc;
 
-  const AppFormPerson(
+  const FormPerson(
       {Key? key,
       required this.actionForm,
       required this.record,
       required this.repositoryObject,
-      required this.saveData})
+      required this.saveOrAddFunc})
       : super(key: key);
 
   @override
-  State<AppFormPerson> createState() => _AppFormPersonState();
+  State<FormPerson> createState() => _FormPersonState();
 }
 
-class _AppFormPersonState extends State<AppFormPerson> {
+class _FormPersonState extends State<FormPerson> {
   final _formKey = GlobalKey<FormState>();
 
   String? _fieldValidator(String? value) {
@@ -153,9 +153,9 @@ class _AppFormPersonState extends State<AppFormPerson> {
                             photo: photoLink);
 
                         if (widget.actionForm == ActionForm.add) {
-                          widget.saveData([myTestPers.toJson()]);
+                          widget.saveOrAddFunc([myTestPers.toJson()]);
                         } else {
-                          widget.saveData([myTestPers.toJson()]);
+                          widget.saveOrAddFunc([myTestPers.toJson()]);
                         }
                       }
                     },

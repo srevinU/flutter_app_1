@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/person.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppFormPerson.dart';
+import 'package:flutter_application_1/backEnd/entities/category.dart';
+import 'package:flutter_application_1/frontEnd/utils/FormCategory.dart';
 
-class AppCardPerson extends StatelessWidget {
+class AppCardCategory extends StatelessWidget {
   final int index;
-  final Person record;
+  final Category record;
   final Object repositoryObject;
   final Function saveFunction;
 
-  const AppCardPerson(
+  const AppCardCategory(
       {Key? key,
       required this.index,
       required this.record,
@@ -18,6 +18,11 @@ class AppCardPerson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String logoInitialFromName = record.name.isNotEmpty
+        ? record.name.split(" ").map((name) => name[0]).join("").toUpperCase()
+        : "";
+
     return Center(
       child: Container(
         padding: const EdgeInsets.only(bottom: 8),
@@ -27,12 +32,12 @@ class AppCardPerson extends StatelessWidget {
             /*peopleForm */
             context,
             MaterialPageRoute(
-              builder: (context) => AppFormPerson(
-                actionForm: ActionForm.read,
-                record: record,
-                repositoryObject: repositoryObject,
-                saveData: saveFunction,
-              ),
+              builder: (context) => FormCategory(
+                  actionForm: ActionForm.read,
+                  record: record,
+                  logoInitial : logoInitialFromName,
+                  repositoryObject: repositoryObject,
+                  saveOrAddFunc: saveFunction),
             ),
           ),
           child: Container(
@@ -63,11 +68,13 @@ class AppCardPerson extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         radius: 35,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image(
-                            image: AssetImage("assets/persons/${record.photo}"),
-                          ),
-                        ),
+                            borderRadius: BorderRadius.circular(25),
+                            child: Text(
+                              logoInitialFromName,
+                              style: const TextStyle(
+                                fontSize: 30,
+                              ),
+                            )),
                       ),
                     ],
                   ),
@@ -96,7 +103,7 @@ class AppCardPerson extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            record.phone,
+                            record.name,
                             style: const TextStyle(fontSize: 15),
                           ),
                         ],

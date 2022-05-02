@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/CategoryCardList.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppList.dart';
+import 'package:flutter_application_1/frontEnd/pages/HomePage.dart';
+import 'package:flutter_application_1/frontEnd/utils/ListGeneric.dart';
 import './backEnd/repository/RepoPerson.dart';
 import './backEnd/repository/RepoCatagory.dart';
-import 'body.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +63,7 @@ class _HomePage extends State<HomePage> {
         elevation: 0,
         backgroundColor: Colors.lightBlue,
       ),
-      body: getBody(),
+      body: MyHomePage(currentIndex: _currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) => setState(() => _currentIndex = index),
@@ -81,12 +80,9 @@ class _HomePage extends State<HomePage> {
     switch (_currentIndex) {
       case 0:
         // return Body(addFunction: addOnePeople);
-        return AppList(inputSearch: "", repositoryObject: repoPerson);
+        return ListGeneric(inputSearch: "", repositoryObject: repoPerson);
       case 1:
-        return AppList(inputSearch: "", repositoryObject: repoCategory);
-      case 2:
-        return CategoryCardList(
-            inputSearch: searchString, addOnePeople: addOneCategory);
+        return ListGeneric(inputSearch: "", repositoryObject: repoCategory);
       default:
         return const SizedBox.shrink();
     }
@@ -97,9 +93,7 @@ class _HomePage extends State<HomePage> {
       case 0:
         return "My Contact App";
       case 1:
-        return "Add a contact";
-      case 2:
-        return "Add a category";
+        return "Categories";
       default:
         return "";
     }

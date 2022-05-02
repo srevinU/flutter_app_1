@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/backEnd/entities/category.dart';
 import 'package:flutter_application_1/backEnd/entities/person.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppCardCategory.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppCardPerson.dart';
+import 'package:flutter_application_1/frontEnd/utils/CardCategory.dart';
+import 'package:flutter_application_1/frontEnd/utils/CardPerson.dart';
 
-class AppList extends StatefulWidget {
+class ListGeneric extends StatefulWidget {
   final Object repositoryObject;
   final String inputSearch;
 
-  const AppList({
+  const ListGeneric({
     Key? key,
     required this.repositoryObject,
     required this.inputSearch,
   }) : super(key: key);
 
   @override
-  State<AppList> createState() => _AppListState();
+  State<ListGeneric> createState() => _ListGenericState();
 }
 
-class _AppListState extends State<AppList> {
+class _ListGenericState extends State<ListGeneric> {
   late dynamic _currentRepository;
 
   Future<void> savePeopleData(List<Map<String, dynamic>> record) async {

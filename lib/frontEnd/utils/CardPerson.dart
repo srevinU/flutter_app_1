@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/category.dart';
-import 'package:flutter_application_1/frontEnd/utils/AppFormCategory.dart';
+import 'package:flutter_application_1/backEnd/entities/person.dart';
+import 'package:flutter_application_1/frontEnd/utils/FormPerson.dart';
 
-class AppCardCategory extends StatelessWidget {
+class AppCardPerson extends StatelessWidget {
   final int index;
-  final Category record;
+  final Person record;
   final Object repositoryObject;
   final Function saveFunction;
 
-  const AppCardCategory(
+  const AppCardPerson(
       {Key? key,
       required this.index,
       required this.record,
@@ -27,10 +27,12 @@ class AppCardCategory extends StatelessWidget {
             /*peopleForm */
             context,
             MaterialPageRoute(
-              builder: (context) => AppFormCategory(
-                  actionForm: ActionForm.read,
-                  record: record,
-                  repositoryObject: repositoryObject),
+              builder: (context) => FormPerson(
+                actionForm: ActionForm.read,
+                record: record,
+                repositoryObject: repositoryObject,
+                saveOrAddFunc: saveFunction,
+              ),
             ),
           ),
           child: Container(
@@ -62,11 +64,9 @@ class AppCardCategory extends StatelessWidget {
                         radius: 35,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: const SizedBox
-                              .shrink(), /* Image(
-                            image: AssetImage(
-                                "assets/persons/${"No need to have category photo"}"),
-                          ), */
+                          child: Image(
+                            image: AssetImage("assets/persons/${record.photo}"),
+                          ),
                         ),
                       ),
                     ],
@@ -96,7 +96,7 @@ class AppCardCategory extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            record.name,
+                            record.phone,
                             style: const TextStyle(fontSize: 15),
                           ),
                         ],
