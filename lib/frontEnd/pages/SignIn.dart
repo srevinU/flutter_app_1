@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -18,55 +19,71 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordCtler = TextEditingController();
 
   @override
+  void dispose() {
+    emailCtler.dispose();
+    passwordCtler.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Container(
-      height: size.height * 0.8,
-      padding: const EdgeInsets.all(25),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Form(
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  controller: emailCtler,
-                  decoration: const InputDecoration(labelText: "Email"),
-                  validator: (value) => _fieldValidator(value),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: passwordCtler,
-                  decoration: const InputDecoration(labelText: "Password"),
-                  validator: (value) => _fieldValidator(value),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.cyan,
-                      minimumSize: const Size.fromHeight(50),
-                    ),
-                    child: const Text("Sign In"),
-                    onPressed: () {
-                      print("Sign In Test");
-                    }),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.cyan,
-                      minimumSize: const Size.fromHeight(50),
-                    ),
-                    child: const Text("Log In"),
-                    onPressed: () {
-                      print("Log In Test");
-                    }),
-                const SizedBox(height: 10),
-              ],
-            ),
-          )
-        ],
+      body: Container(
+        height: size.height * 0.8,
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Form(
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: emailCtler,
+                    decoration: const InputDecoration(labelText: "Email"),
+                    validator: (value) => _fieldValidator(value),
+                    autofocus: true,
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: passwordCtler,
+                    decoration: const InputDecoration(labelText: "Password"),
+                    validator: (value) => _fieldValidator(value),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.cyan,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: const Text("Sign In"),
+                      onPressed: () {
+                        print("Sign In Test: ${emailCtler.text}");
+                      }),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.cyan,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: const Text("Log In"),
+                      onPressed: () {
+                        signIn();
+                      }),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
+  }
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailCtler.text.trim(),
+      password: passwordCtler.text.trim(),
+    );
   }
 }

@@ -32,6 +32,8 @@ dependencies:
   http: 0.13.3
   postgres: ^2.4.1+2
   random_date: ^0.0.7
+  firebase_auth: ^3.3.17
+  firebase_core: ^1.16.0
 
 
   # The following adds the Cupertino Icons font to your application.
