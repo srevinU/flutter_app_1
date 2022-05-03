@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'PeopleForm.dart';
-import 'PeopleCardList.dart';
+import 'package:flutter_application_1/backEnd/repository/RepoCatagory.dart';
+import 'package:flutter_application_1/backEnd/repository/RepoPerson.dart';
+import 'package:flutter_application_1/frontEnd/utils/ListGeneric.dart';
 
 class Body extends StatefulWidget {
-  final Function addFunction;
+  // final Function addFunction;
+  final int currentIndex;
 
-  const Body({Key? key, required this.addFunction}) : super(key: key);
+  const Body({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   State<Body> createState() => _Body();
@@ -13,6 +15,8 @@ class Body extends StatefulWidget {
 
 class _Body extends State<Body> {
   String searchString = "";
+  RepoPerson repoPerson = RepoPerson();
+  RepoCategory repoCategory = RepoCategory();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,7 @@ class _Body extends State<Body> {
                     // 15% of the current devise used by end-user
                     height: size.height * 0.30,
                     decoration: const BoxDecoration(
-                      color: Colors.lightBlue,
+                      color: Colors.cyan,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(25),
                         bottomRight: Radius.circular(25),
@@ -80,9 +84,22 @@ class _Body extends State<Body> {
           width: 400,
           height: size.height * 0.67,
           color: Colors.transparent,
-          child: PeopleCardList(inputSearch: searchString, addOnePeople: widget.addFunction),
+          child: getBody(searchString),
         ),
       ],
     );
+  }
+
+  Widget? getBody(searchString) {
+    switch (widget.currentIndex) {
+      case 0:
+        return ListGeneric(
+            inputSearch: searchString, repositoryObject: repoPerson);
+      case 1:
+        return ListGeneric(
+            inputSearch: searchString, repositoryObject: repoCategory);
+      default:
+        return const SizedBox.shrink();
+    }
   }
 }

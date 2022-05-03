@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/backend/entities/entity.dart';
+import 'package:flutter_application_1/backend/entities/Entity.dart';
 
 class Category extends Entity {
   @override

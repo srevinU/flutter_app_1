@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/category.dart';
+import 'package:flutter_application_1/backEnd/entities/Category.dart';
 import 'package:flutter_application_1/frontEnd/utils/FormCategory.dart';
 
 class AppCardCategory extends StatelessWidget {
@@ -18,7 +18,6 @@ class AppCardCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     String logoInitialFromName = record.name.isNotEmpty
         ? record.name.split(" ").map((name) => name[0]).join("").toUpperCase()
         : "";
@@ -35,7 +34,7 @@ class AppCardCategory extends StatelessWidget {
               builder: (context) => FormCategory(
                   actionForm: ActionForm.read,
                   record: record,
-                  logoInitial : logoInitialFromName,
+                  logoInitial: logoInitialFromName,
                   repositoryObject: repositoryObject,
                   saveOrAddFunc: saveFunction),
             ),

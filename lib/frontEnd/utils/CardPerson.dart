@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/person.dart';
+import 'package:flutter_application_1/backEnd/entities/Person.dart';
 import 'package:flutter_application_1/frontEnd/utils/FormPerson.dart';
 
 class AppCardPerson extends StatelessWidget {

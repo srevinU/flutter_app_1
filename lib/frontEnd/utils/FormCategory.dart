@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/category.dart';
+import 'package:flutter_application_1/backEnd/entities/Category.dart';
 
 enum ActionForm { read, add, save }
 

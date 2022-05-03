@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/entities/category.dart';
-import 'package:flutter_application_1/backEnd/entities/person.dart';
+import 'package:flutter_application_1/backEnd/entities/Category.dart';
+import 'package:flutter_application_1/backEnd/entities/Person.dart';
 import 'package:flutter_application_1/frontEnd/utils/CardCategory.dart';
 import 'package:flutter_application_1/frontEnd/utils/CardPerson.dart';
 
