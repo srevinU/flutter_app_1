@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/backEnd/repository/RepoCatagory.dart';
 import 'package:flutter_application_1/backEnd/repository/RepoPerson.dart';
 import 'package:flutter_application_1/frontEnd/utils/Body.dart';
+import 'package:flutter_application_1/frontEnd/utils/MenuDrawer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _Home extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(239, 239, 239, 1),
+      drawer: const MenuDrawer(),
       appBar: AppBar(
         title: Text(
           getAppBarTitle(),
