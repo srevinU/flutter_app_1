@@ -26,7 +26,7 @@ class RecordGenerator {
 
   List<String> _generateImagesFileName() {
     List<String> result = [];
-    Directory dir = Directory('/Users/cedric/dev/perso/flutter/flutter_app_1');
+    Directory dir = Directory('/Users/cedric/dev/perso/flutter/flutter_app_1/assets/persons');
     // /Users/cedric/dev/perso/flutter/flutter_app_1
     // /Users/cedricsegura/dev/perso/flutter_p/flutter_app_1/assets/persons
     List images = dir.listSync();
@@ -109,6 +109,6 @@ class RecordGenerator {
 
 main(List<String> args) {
   RecordGenerator test = RecordGenerator();
-  // test.generatePerson(10);
-  test.generateCategory(10);
+  test.generatePerson(10);
+  // test.generateCategory(10);
 }

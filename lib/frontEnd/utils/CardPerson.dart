@@ -22,9 +22,7 @@ class AppCardPerson extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(bottom: 8),
         child: GestureDetector(
-          // onTap: () => print("Open contact ${index}"),
           onTap: () => Navigator.push(
-            /*peopleForm */
             context,
             MaterialPageRoute(
               builder: (context) => FormPerson(

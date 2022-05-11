@@ -21,7 +21,7 @@ class ListGeneric extends StatefulWidget {
 class _ListGenericState extends State<ListGeneric> {
   late dynamic _currentRepository;
 
-  Future<void> savePeopleData(List<Map<String, dynamic>> record) async {
+  Future<void> saveRecord(List<Map<String, dynamic>> record) async {
     await _currentRepository.updateRecord(record);
     if (mounted) {
       setState(() => {});
@@ -45,9 +45,9 @@ class _ListGenericState extends State<ListGeneric> {
                   return Dismissible(
                     key: ValueKey<String>(item['sys_uuid']),
                     direction: DismissDirection.endToStart,
-                    onDismissed: (DismissDirection direction) {
-                      _currentRepository.deleteRecord(item['sys_uuid']);
-                      item.removeAt(index);
+                    onDismissed: (DismissDirection direction) async {
+                      await _currentRepository.deleteRecord(item['sys_uuid']);
+                      data.removeAt(index);
                     },
                     background: Container(
                       padding: const EdgeInsets.only(right: 15),
@@ -99,14 +99,14 @@ class _ListGenericState extends State<ListGeneric> {
             index: index,
             record: Person.fromJson(record),
             repositoryObject: _currentRepository,
-            saveFunction: savePeopleData);
+            saveFunction: saveRecord);
 
       case "t_category":
         return AppCardCategory(
             index: index,
             record: Category.fromJson(record),
             repositoryObject: _currentRepository,
-            saveFunction: savePeopleData);
+            saveFunction: saveRecord);
 
       default:
         return const SizedBox.shrink();
