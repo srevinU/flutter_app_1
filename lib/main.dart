@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/frontEnd/pages/Home.dart';
 import 'package:flutter_application_1/frontEnd/pages/SignIn.dart';
 import 'package:flutter_application_1/backEnd/dataBases/firebase/FireDb.dart';
+import 'package:dotenv/dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

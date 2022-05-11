@@ -7,7 +7,7 @@ class Repository {
   //********************************************************* Data event *****\\
 
   Future<List<Map<String, dynamic>>> getRecords() async {
-    PgDb myDb = PgDb();
+    PgDb myDb = await PgDb.init();
     try {
       await myDb.open();
       return await myDb.mappedResultsQuery(_getGetQuery());
@@ -19,7 +19,7 @@ class Repository {
   }
 
   dynamic insertRecord(List<Map<String, dynamic>> record) async {
-    PgDb myDb = PgDb();
+    PgDb myDb = await PgDb.init();
     try {
       await myDb.open();
       return await myDb.query(getInsertQuery(),
@@ -33,7 +33,7 @@ class Repository {
   }
 
   dynamic updateRecord(List<Map<String, dynamic>>? record) async {
-    PgDb myDb = PgDb();
+    PgDb myDb = await PgDb.init();
     try {
       await myDb.open();
       return await myDb.query(getUpdateQuery(), substitutionValues: record?[0]);
@@ -45,7 +45,7 @@ class Repository {
   }
 
   dynamic deleteRecord(String sysUuid) async {
-    PgDb myDb = PgDb();
+    PgDb myDb = await PgDb.init();
     try {
       await myDb.open();
       return await myDb
