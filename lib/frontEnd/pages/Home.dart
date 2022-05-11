@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/backEnd/repository/RepoCatagory.dart';
-import 'package:flutter_application_1/backEnd/repository/RepoPerson.dart';
 import 'package:flutter_application_1/frontEnd/utils/Body.dart';
 import 'package:flutter_application_1/frontEnd/utils/MenuDrawer.dart';
+import 'package:flutter_application_1/backEnd/repository/RepoCatagory.dart';
+import 'package:flutter_application_1/backEnd/repository/RepoPerson.dart';
+import 'package:flutter_application_1/frontEnd/utils/FormCategory.dart';
+import 'package:flutter_application_1/frontEnd/utils/FormPerson.dart' as test;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -49,7 +51,7 @@ class _Home extends State<Home> {
       ),
       body: Body(currentIndex: _currentIndex),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => getRedirection(),
         backgroundColor: Colors.cyan,
         child: const Icon(Icons.add),
       ),
@@ -87,6 +89,37 @@ class _Home extends State<Home> {
         return "Categories";
       default:
         return "";
+    }
+  }
+
+  Future<dynamic>? getRedirection() {
+    switch (_currentIndex) {
+      case 0:
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => test.FormPerson(
+                actionForm: test.ActionForm.add,
+                repositoryObject: repoPerson,
+                saveOrAddFunc: addOnePeople,
+                record: null),
+          ),
+        );
+      case 1:
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FormCategory(
+              actionForm: ActionForm.add,
+              repositoryObject: repoCategory,
+              saveOrAddFunc: addOneCategory,
+              logoInitial: "",
+              record: null,
+            ),
+          ),
+        );
+      default:
+        return null;
     }
   }
 }

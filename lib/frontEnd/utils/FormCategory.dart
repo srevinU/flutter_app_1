@@ -5,7 +5,7 @@ enum ActionForm { read, add, save }
 
 class FormCategory extends StatefulWidget {
   final ActionForm actionForm;
-  final Category record;
+  final Category? record;
   final String logoInitial;
   final Object repositoryObject;
   final Function saveOrAddFunc;
@@ -38,19 +38,17 @@ class _FormCategoryState extends State<FormCategory> {
   @override
   Widget build(BuildContext context) {
     if (widget.actionForm == ActionForm.read) {
-      categorySysUuidCtler.text = widget.record.sysUuid!;
-      categoryNameCtler.text = widget.record.name;
-      categoryColorCtler.text = widget.record.color!;
-      categotyDescriptionCtler.text = widget.record.description!;
+      categorySysUuidCtler.text = widget.record!.sysUuid!;
+      categoryNameCtler.text = widget.record!.name;
+      categoryColorCtler.text = widget.record!.color!;
+      categotyDescriptionCtler.text = widget.record!.description!;
     }
 
     return Scaffold(
-      appBar: (widget.actionForm == ActionForm.read)
-          ? AppBar(
+      appBar: AppBar(
               elevation: 0,
-              backgroundColor: Colors.lightBlue,
-            )
-          : null,
+              backgroundColor: Colors.cyan,
+            ),
       body: Column(
         children: <Widget>[
           CircleAvatar(

@@ -41,12 +41,6 @@ class AppCardPerson extends StatelessWidget {
                 Radius.circular(15),
               ),
               color: Colors.white,
-              /* boxShadow: <BoxShadow>[
-                BoxShadow(
-                  offset: Offset(0, 10),
-                  color: Colors.black12,
-                ),
-              ], */
             ),
             margin: const EdgeInsets.only(bottom: 1),
             child: Row(

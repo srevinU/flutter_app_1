@@ -5,7 +5,7 @@ enum ActionForm { read, add, save }
 
 class FormPerson extends StatefulWidget {
   final ActionForm actionForm;
-  final Person record;
+  final Person? record;
   final Object repositoryObject;
   final Function saveOrAddFunc;
 
@@ -41,27 +41,25 @@ class _FormPersonState extends State<FormPerson> {
   @override
   Widget build(BuildContext context) {
     if (widget.actionForm == ActionForm.read) {
-      personSysUuidCtler.text = widget.record.sysUuid!;
-      personNameCtler.text = widget.record.name;
-      birthDateCtler.text = widget.record.birthDate;
-      phoneCtler.text = widget.record.phone;
-      emailCtler.text = widget.record.email;
-      genderCtler.text = widget.record.gender;
-      streetAddressCtler.text = widget.record.streetAddress;
-      countryCtler.text = widget.record.country;
-      postalCodeCtler.text = widget.record.postalCode;
+      personSysUuidCtler.text = widget.record!.sysUuid!;
+      personNameCtler.text = widget.record!.name;
+      birthDateCtler.text = widget.record!.birthDate;
+      phoneCtler.text = widget.record!.phone;
+      emailCtler.text = widget.record!.email;
+      genderCtler.text = widget.record!.gender;
+      streetAddressCtler.text = widget.record!.streetAddress;
+      countryCtler.text = widget.record!.country;
+      postalCodeCtler.text = widget.record!.postalCode;
     }
 
     String photoLink =
-        widget.record.photo ?? "deer_jumping_silhouette_animal.jpeg";
+        widget.record?.photo ?? "generated_photos_5dd0849adef8b400084c4aa8.png";
 
     return Scaffold(
-      appBar: (widget.actionForm == ActionForm.read)
-          ? AppBar(
+      appBar: AppBar(
               elevation: 0,
-              backgroundColor: Colors.lightBlue,
-            )
-          : null,
+              backgroundColor: Colors.cyan,
+            ),
       body: Column(
         children: <Widget>[
           CircleAvatar(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/backEnd/common/printer.dart';
+import 'package:flutter_application_1/backEnd/dataBases/firebase/FireDb.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class MenuDrawer extends StatelessWidget {
                 ]),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () => _logOut(),
+              onPressed: () => FireDb.logOut(),
               style: ElevatedButton.styleFrom(
                   primary: Colors.transparent, elevation: 0),
               child: Row(
@@ -48,14 +47,5 @@ class MenuDrawer extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _logOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-    } catch (exp) {
-      printError(exp);
-    }
-    ;
   }
 }
