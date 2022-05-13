@@ -35,6 +35,13 @@ dependencies:
   firebase_auth: ^3.3.17
   firebase_core: ^1.16.0
   flutter_dotenv: ^5.0.2
+  camera:
+    git:
+      url: https://github.com/flutter/plugins
+      path: packages/camera/camera
+      ref: 9e46048ad2e1f085c1e8f6c77391fa52025e681f
+  path_provider: ^2.0.10
+  path: ^1.8.0
 
 
   # The following adds the Cupertino Icons font to your application.
