@@ -43,6 +43,21 @@ class MenuDrawer extends StatelessWidget {
                 ],
               ),
             ),
+            ElevatedButton(
+              onPressed: () => {print("Picture!")},
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent, elevation: 0),
+              child: Row(
+                children: const <Widget>[
+                  Icon(Icons.camera_alt_outlined, color: Colors.black),
+                  SizedBox(width: 10),
+                  Text(
+                    "Take picture",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

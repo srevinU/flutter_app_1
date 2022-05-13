@@ -3,16 +3,9 @@ import 'package:postgres/postgres.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PgDb extends PostgreSQLConnection {
-  String myHost;
-  int myPort;
-  String myDatabaseName;
-  String userName;
-  String passWord;
-  String timeZ;
-  int timeoutInSec;
-  int queryTimeoutInSec;
-  bool useSsl;
-  bool isUnixSockett;
+  String myHost, myDatabaseName, userName, passWord, timeZ;
+  int myPort, timeoutInSec, queryTimeoutInSec;
+  bool useSsl, isUnixSockett;
 
   PgDb(
       {required this.myHost,

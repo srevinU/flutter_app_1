@@ -123,6 +123,7 @@ class _FormPersonState extends State<FormPerson> {
                 ),
                 Align(
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.cyan),
                     child: (widget.actionForm == ActionForm.add)
                         ? const Text("Add")
                         : const Text("Save"),

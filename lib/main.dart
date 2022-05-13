@@ -1,14 +1,17 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/frontEnd/pages/Home.dart';
 import 'package:flutter_application_1/frontEnd/pages/SignIn.dart';
 import 'package:flutter_application_1/backEnd/dataBases/firebase/FireDb.dart';
-import 'package:dotenv/dotenv.dart';
+import 'package:flutter_application_1/frontEnd/utils/PictureTaker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FireDb.init();
-  runApp(const MyApp());
+  final List<CameraDescription> cameras = await availableCameras();
+  runApp(PictureTaker(cameras: cameras));
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

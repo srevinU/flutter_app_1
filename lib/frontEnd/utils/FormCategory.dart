@@ -90,6 +90,7 @@ class _FormCategoryState extends State<FormCategory> {
                 ),
                 Align(
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.cyan),
                     child: (widget.actionForm == ActionForm.add)
                         ? const Text("Add")
                         : const Text("Save"),
