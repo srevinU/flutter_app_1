@@ -1,5 +1,5 @@
 void printSucess(dynamic text) {
-  print("✅[Sucess] $text");
+  print("✅ [Sucess] $text");
 }
 
 void printWarning(dynamic text) {

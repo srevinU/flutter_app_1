@@ -1,8 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/backEnd/dataBases/firebase/FireDb.dart';
+import 'package:flutter_application_1/frontEnd/utils/PictureTaker.dart';
 
 class MenuDrawer extends StatelessWidget {
-  const MenuDrawer({Key? key}) : super(key: key);
+  final CameraDescription? camera;
+  const MenuDrawer({Key? key, this.camera}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,12 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () => {print("Picture!")},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PictureTaker(camera: camera),
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                   primary: Colors.transparent, elevation: 0),
               child: Row(

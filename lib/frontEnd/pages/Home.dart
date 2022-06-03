@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/frontEnd/utils/Body.dart';
 import 'package:flutter_application_1/frontEnd/utils/MenuDrawer.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_application_1/frontEnd/utils/FormCategory.dart';
 import 'package:flutter_application_1/frontEnd/utils/FormPerson.dart' as test;
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final CameraDescription? camera;
+  const Home({Key? key, this.camera}) : super(key: key);
 
   @override
   State<Home> createState() => _Home();
@@ -40,7 +42,7 @@ class _Home extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(239, 239, 239, 1),
-      drawer: const MenuDrawer(),
+      drawer: MenuDrawer(camera: widget.camera),
       appBar: AppBar(
         title: Text(
           getAppBarTitle(),
